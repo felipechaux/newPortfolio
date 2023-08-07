@@ -4,7 +4,6 @@ import whiteabstract from './backgrounds/white-abstract.png';
 
 import logo from './logo/logo-black.png';
 import logotext from './logo/logo-text-black.png';
-
 import feli from './personal/felipe2.png';
 
 import backend from './icons/backend.png';
@@ -22,6 +21,8 @@ import menu from './icons/menu.png';
 import resume from './icons/resume.png';
 import send from './icons/send.png';
 import sendHover from './icons/sendHover.png';
+import mobile from './icons/app-development.png';
+import game from './icons/game-development.png';
 
 import css from './tech/css.png';
 import docker from './tech/docker.png';
@@ -40,15 +41,34 @@ import rubyrails from './tech/rubyrails.png';
 
 import coverhunt from './company/coverhunt.png';
 import acid from './company/acid.jpg';
+import globant from './company/globant.png';
 import dcc from './company/dcc.png';
 import kelhel from './company/kelhel.png';
 import microverse from './company/microverse.png';
+import asesoftware from './company/asesoftware.jpeg';
+import umb from './company/umb.jpeg';
+import sinte from './company/sinte.png';
+import ugm from './company/ugm.jpeg';
+import jazzplat from './company/jazzplat.jpeg';
+
 
 import movies from './projects/movies.jpg';
-import leaderboard from './projects/leaderboard.png';
 import math from './projects/math-magicians.png';
 import movie from './projects/movie-metro.png';
 import nyeusi from './projects/nyeusi.png';
+
+import inproext from './projects/inproext-app.png';
+import easy from './projects/easy-app.png';
+import horneo from './projects/horneo-1.png';
+import todoPago from './projects/todopago.png';
+import pagaTodo from './projects/pagatodo.png';
+import meli from './projects/meli.png';
+import actpol from './projects/actpol.png';
+
+import platzito from './projects/platzito.png';
+import spaceman from './projects/spaceman.png';
+import pongx from './projects/pongx.png';
+import montes from './projects/montes.png';
 
 export {
   nairobi,
@@ -84,7 +104,6 @@ export {
   redux,
   tailwind,
   typescript,
-  leaderboard,
   math,
   movie,
   nyeusi,
@@ -95,5 +114,24 @@ export {
   games,
   space,
   movies,
-  acid
+  acid,
+  inproext,
+  easy,
+  horneo,
+  todoPago,
+  pagaTodo,
+  meli,
+  actpol,
+  globant,
+  mobile,
+  game,
+  asesoftware,
+  umb,
+  sinte,
+  ugm,
+  jazzplat,
+  platzito,
+  spaceman,
+  pongx,
+  montes
 };

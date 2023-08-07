@@ -17,7 +17,6 @@ import {
   postgresql,
   rubyrails,
   graphql,
-  leaderboard,
   math,
   movie,
   nyeusi,
@@ -28,7 +27,26 @@ import {
   kelhel,
   microverse,
   games,
-  movies
+  movies,
+  inproext,
+  easy,
+  horneo,
+  todoPago,
+  pagaTodo,
+  meli,
+  actpol,
+  globant,
+  mobile,
+  game,
+  asesoftware,
+  umb,
+  sinte,
+  ugm,
+  jazzplat,
+  platzito,
+  spaceman,
+  pongx,
+  montes
 } from '../assets';
 
 export const navLinks = [
@@ -49,7 +67,7 @@ export const navLinks = [
 const services = [
   {
     title: 'Mobile Development',
-    icon: prototyping,
+    icon: mobile,
   },
   {
     title: 'Frontend Developer',
@@ -57,7 +75,7 @@ const services = [
   },
   {
     title: 'Game Development',
-    icon: games,
+    icon: game,
   }
 ];
 
@@ -93,35 +111,163 @@ const experiences = [
     title: 'Mobile Software Engineer V',
     company_name: 'Acid Labs',
     icon: acid,
-    iconBg: '#333333',
+    iconBg: '#FFFFFF',
     date: 'Sep 2022 - Present',
   },
   {
-    title: 'Mentor (Volunteer)',
-    company_name: 'Microverse',
-    icon: microverse,
-    iconBg: '#333333',
-    date: 'Mar 2022 - May 2022',
+    title: 'Android Mobile Developer',
+    company_name: 'Globant',
+    icon: globant,
+    iconBg: '#FFFFFF',
+    date: 'Feb 2021 - Jul 2022',
   },
   {
-    title: 'Junior Software Engineer',
-    company_name: 'Kelhel',
-    icon: kelhel,
-    iconBg: '#333333',
-    date: 'May 2022 - Oct 2022',
+    title: 'Mobile Developer',
+    company_name: 'Asesoftware',
+    icon: asesoftware,
+    iconBg: '#FFFFFF',
+    date: 'Abr 2019 - Feb 2021',
   },
   {
-    title: 'Full Stack Developer',
-    company_name: 'Diversity Cyber Council',
-    icon: dcc,
-    iconBg: '#333333',
-    date: 'Sep 2022 - Present',
+    title: 'Software Engineer',
+    company_name: 'Manuela Beltran University',
+    icon: umb,
+    iconBg: '#FFFFFF',
+    date: 'May 2018 - Oct 2018',
   },
+  {
+    title: 'Software Developer',
+    company_name: 'Sinte Soluciones',
+    icon: sinte,
+    iconBg: '#333333',
+    date: 'Jul 2017 - May 2018',
+  },
+  {
+    title: 'e-learning Programmer',
+    company_name: 'Unigermana',
+    icon: ugm,
+    iconBg: '#000000',
+    date: 'Mar 2016 - May 2017',
+  },
+  {
+    title: 'Programmer',
+    company_name: 'Jazzplat Colombia',
+    icon: jazzplat,
+    iconBg: '#FFFFFF',
+    date: 'Jul 2015 - Dic 2015',
+  }
 ];
 
 const projects = [
   {
     id: 'project-1',
+    name: 'EasyApp',
+    description: 'Retail App for Chile - buy whatever you want',
+    tags: [
+      {
+        name: 'nextjs',
+        color: 'blue-text-gradient',
+      },
+      {
+        name: 'supabase',
+        color: 'green-text-gradient',
+      },
+      {
+        name: 'css',
+        color: 'pink-text-gradient',
+      },
+    ],
+    image: easy,
+    demo: 'https://play.google.com/store/apps/details?id=com.cencosud.easy.cl&pli=1',
+  },
+  {
+    id: 'project-2',
+    name: 'TodoPago',
+    description: 'Digital wallet for Argentina',
+    tags: [
+      {
+        name: 'nextjs',
+        color: 'blue-text-gradient',
+      },
+      {
+        name: 'supabase',
+        color: 'green-text-gradient',
+      },
+      {
+        name: 'css',
+        color: 'pink-text-gradient',
+      },
+    ],
+    image: todoPago,
+    demo: 'https://play.google.com/store/apps/details?id=com.prisma.todopago2&hl=es_CR',
+  },
+  {
+    id: 'project-3',
+    name: 'Horneo App',
+    description: 'Coorporative App to get deliveries of products - Colombia',
+    tags: [
+      {
+        name: 'react',
+        color: 'blue-text-gradient',
+      },
+      {
+        name: 'mongodb',
+        color: 'green-text-gradient',
+      },
+      {
+        name: 'tailwind',
+        color: 'pink-text-gradient',
+      },
+    ],
+    image: horneo,
+    demo: 'https://play.google.com/store/apps/details?id=com.tostao.pedidos',
+  },
+  {
+    id: 'project-4',
+    name: 'PagaTodo App',
+    description: 'Digital wallet portfolio of products - Colombia',
+    tags: [
+      {
+        name: 'react',
+        color: 'blue-text-gradient',
+      },
+      {
+        name: 'mongodb',
+        color: 'green-text-gradient',
+      },
+      {
+        name: 'tailwind',
+        color: 'pink-text-gradient',
+      },
+    ],
+    image: pagaTodo,
+    demo: 'https://play.google.com/store/apps/details?id=pagatodo.datacenter.com.pagatodo&pli=1',
+  },
+  {
+    id: 'project-5',
+    name: 'InproextApp',
+    description:
+      'Coorporative news tool App',
+    tags: [
+      {
+        name: 'react',
+        color: 'blue-text-gradient',
+      },
+      {
+        name: 'restapi',
+        color: 'green-text-gradient',
+      },
+      {
+        name: 'scss',
+        color: 'pink-text-gradient',
+      },
+    ],
+    image: inproext,
+    repo: 'https://github.com/felipechaux/flutter/tree/master/inproext_app',
+    demo: 'https://play.google.com/store/apps/details?id=com.inproext.inproextapp',
+  },
+  {
+    id: 'project-6',
     name: 'Movies Library DB App',
     description: 'Data Base of current Movies on Cinema',
     tags: [
@@ -139,99 +285,141 @@ const projects = [
       },
     ],
     image: movies,
-    repo: 'https://github.com/shaqdeff/KomiKult',
     demo: 'https://play.google.com/store/apps/details?id=com.felipechauxlab.movieslibrarydb&hl=es_CR',
-  },
+  }
+];
+
+const projectsTwo = [
   {
-    id: 'project-2',
-    name: 'Leaderboard',
-    description:
-      'A leaderboard list app that displays scores submitted by different players.',
+    id: 'project-7',
+    name: 'Meli Challenge App',
+    description: 'App that shows info of MercadoLibre API ',
     tags: [
       {
         name: 'react',
         color: 'blue-text-gradient',
       },
       {
-        name: 'restapi',
+        name: 'mongodb',
         color: 'green-text-gradient',
       },
       {
-        name: 'scss',
+        name: 'tailwind',
         color: 'pink-text-gradient',
       },
     ],
-    image: leaderboard,
-    repo: 'https://github.com/shaqdeff/Leaderboard',
-    demo: 'https://shaqdeff.github.io/Leaderboard/',
-  },
+    image: meli,
+    repo: 'https://github.com/felipechaux/meliChallenge'
+  }
+  ,
   {
-    id: 'project-3',
-    name: 'Math Magicians',
-    description: 'This is a single-page calculator app built with React',
+    id: 'project-8',
+    name: 'ACTPOL App - Curazao',
+    description: 'an App that helps the police of curacao to detect criminals by  license plate detection',
     tags: [
       {
-        name: 'nextjs',
+        name: 'react',
         color: 'blue-text-gradient',
       },
       {
-        name: 'supabase',
+        name: 'mongodb',
         color: 'green-text-gradient',
       },
       {
-        name: 'css',
+        name: 'tailwind',
         color: 'pink-text-gradient',
       },
     ],
-    image: math,
-    repo: 'https://github.com/shaqdeff/Math-Magicians',
-    demo: 'https://inspiring-medovik-37d3b3.netlify.app/',
-  },
-  {
-    id: 'project-4',
-    name: 'Movie Metro',
-    description: `A single-page application that allows users to search for any movie or show's ratings and its details.`,
-    tags: [
-      {
-        name: 'nextjs',
-        color: 'blue-text-gradient',
-      },
-      {
-        name: 'supabase',
-        color: 'green-text-gradient',
-      },
-      {
-        name: 'css',
-        color: 'pink-text-gradient',
-      },
-    ],
-    image: movie,
-    repo: 'https://github.com/shaqdeff/Movie-Metro',
-    demo: 'https://movie-metro.netlify.app/',
-  },
-  {
-    id: 'project-5',
-    name: 'Nyeusi Fest Site',
-    description:
-      'This is a demo concert website for a music festival called Nyeusi.',
-    tags: [
-      {
-        name: 'nextjs',
-        color: 'blue-text-gradient',
-      },
-      {
-        name: 'supabase',
-        color: 'green-text-gradient',
-      },
-      {
-        name: 'css',
-        color: 'pink-text-gradient',
-      },
-    ],
-    image: nyeusi,
-    repo: 'https://github.com/shaqdeff/Nyeusi-Fest-Site',
-    demo: 'https://shaqdeff.github.io/Nyeusi-Fest-Site/',
-  },
+    image: actpol,
+    demo: 'https://masnoticia.com/kpa-a-lansa-oficialmente-nan-mobile-actpol-app-pa-asina-facilita-e-trabou-y-siguridad-di-cada-agente-policial-riba-nos-isla/',
+  }
 ];
 
-export { services, technologies, experiences, projects };
+const projectGames = [
+  {
+    id: 'game-1',
+    name: 'Platzito',
+    description: 'Platzito',
+    tags: [
+      {
+        name: 'react',
+        color: 'blue-text-gradient',
+      },
+      {
+        name: 'mongodb',
+        color: 'green-text-gradient',
+      },
+      {
+        name: 'tailwind',
+        color: 'pink-text-gradient',
+      },
+    ],
+    image: platzito,
+    demo: 'https://constelaciongames.itch.io/platzito'
+  },
+  {
+    id: 'game-2',
+    name: 'SpaceMan',
+    description: 'SpaceMan',
+    tags: [
+      {
+        name: 'react',
+        color: 'blue-text-gradient',
+      },
+      {
+        name: 'mongodb',
+        color: 'green-text-gradient',
+      },
+      {
+        name: 'tailwind',
+        color: 'pink-text-gradient',
+      },
+    ],
+    image: spaceman,
+    demo: 'https://constelaciongames.itch.io/spaceman'
+  },
+  {
+    id: 'game-3',
+    name: 'Pongx',
+    description: 'Pongx',
+    tags: [
+      {
+        name: 'react',
+        color: 'blue-text-gradient',
+      },
+      {
+        name: 'mongodb',
+        color: 'green-text-gradient',
+      },
+      {
+        name: 'tailwind',
+        color: 'pink-text-gradient',
+      },
+    ],
+    image: pongx,
+    demo: 'https://constelaciongames.itch.io/pongx'
+  },
+  {
+    id: 'game-4',
+    name: 'Montes',
+    description: 'Montes',
+    tags: [
+      {
+        name: 'react',
+        color: 'blue-text-gradient',
+      },
+      {
+        name: 'mongodb',
+        color: 'green-text-gradient',
+      },
+      {
+        name: 'tailwind',
+        color: 'pink-text-gradient',
+      },
+    ],
+    image: montes,
+    demo: 'https://constelaciongames.itch.io/montes-de-maria'
+  }
+];
+
+export { services, technologies, experiences, projects, projectsTwo, projectGames };

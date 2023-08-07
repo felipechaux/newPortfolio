@@ -4,6 +4,8 @@ import { SectionWrapper } from '../hoc';
 import { styles } from '../styles';
 import { github, pineapple, pineappleHover } from '../assets';
 import { projects } from '../constants';
+import { projectsTwo } from '../constants';
+import { projectGames } from '../constants';
 import { fadeIn, textVariant, staggerContainer } from '../utils/motion';
 
 const ProjectCard = ({
@@ -126,11 +128,17 @@ const Projects = () => {
           className="mt-4 text-taupe text-[18px] max-w-3xl leading-[30px]">
          These projects serve as compelling demonstrations of my expertise,
           showcasing practical examples of my work. Each project 
-          includes brief descriptions and provides links to code repositories 
+          includes brief descriptions and some of them provides links to code repositories 
           and live demos. These showcases effectively highlight my ability 
           to tackle intricate challenges and adapt to various technologies.
         </motion.p>
       </div>
+
+      <br></br>
+      <br></br>
+      <motion.div variants={textVariant()}>
+        <h3 className={`${styles.sectionHeadTextLight}`}>Apps</h3>
+      </motion.div>
 
       <motion.div
         variants={staggerContainer}
@@ -147,7 +155,50 @@ const Projects = () => {
               active={active}
               handleClick={setActive}
             />
-          ))}
+          ))
+          }
+        </div>
+      </motion.div>
+
+      <motion.div
+        variants={staggerContainer}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: false, amount: 0.25 }}
+        className={`${styles.innerWidth} mx-auto flex flex`}>
+        <div className="mt-[0px] flex lg:flex-row flex-col min-h-[70vh] gap-5">
+          {projectsTwo.map((project, index) => (
+            <ProjectCard
+              key={project.id}
+              index={index}
+              {...project}
+              active={active}
+              handleClick={setActive}
+            />
+          ))
+          }
+        </div>
+      </motion.div>
+      <motion.div variants={textVariant()}>
+        <h3 className={`${styles.sectionHeadTextLight}`}>Some Games</h3>
+      </motion.div>
+      <motion.div
+        variants={staggerContainer}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: false, amount: 0.25 }}
+        className={`${styles.innerWidth} mx-auto flex flex`}>
+        <div className="mt-[50px] flex lg:flex-row flex-col min-h-[70vh] gap-5">
+          {projectGames.map((project, index) => (
+            <ProjectCard
+              key={project.id}
+              index={index}
+              {...project}
+              active={active}
+              handleClick={setActive}
+            />
+          ))
+          }
         </div>
       </motion.div>
     </div>
