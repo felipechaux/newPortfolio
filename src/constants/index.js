@@ -1,32 +1,11 @@
 import {
   frontend,
   backend,
-  ux,
-  prototyping,
   javascript,
-  typescript,
   html,
-  css,
   reactjs,
-  redux,
-  tailwind,
-  nodejs,
   git,
-  figma,
-  docker,
-  postgresql,
-  rubyrails,
-  graphql,
-  math,
-  movie,
-  nyeusi,
-  space,
-  coverhunt,
   acid,
-  dcc,
-  kelhel,
-  microverse,
-  games,
   movies,
   inproext,
   easy,
@@ -46,7 +25,9 @@ import {
   platzito,
   spaceman,
   pongx,
-  montes
+  montes,
+  unity,
+  android
 } from '../assets';
 
 export const navLinks = [
@@ -81,24 +62,24 @@ const services = [
 
 const technologies = [
   {
-    name: 'HTML 5',
-    icon: html,
+    name: 'Android',
+    icon: android,
   },
   {
-    name: 'CSS 3',
-    icon: css,
-  },
-  {
-    name: 'JavaScript',
-    icon: javascript,
+    name: 'Unity',
+    icon: unity,
   },
   {
     name: 'React JS',
     icon: reactjs,
   },
   {
-    name: 'Node JS',
-    icon: nodejs,
+    name: 'HTML 5',
+    icon: html,
+  },
+  {
+    name: 'JavaScript',
+    icon: javascript,
   },
   {
     name: 'git',

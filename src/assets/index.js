@@ -5,6 +5,7 @@ import whiteabstract from './backgrounds/white-abstract.png';
 import logo from './logo/logo-black.png';
 import logotext from './logo/logo-text-black.png';
 import feli from './personal/felipe2.png';
+import astronaut from './logo/helmet.png';
 
 import backend from './icons/backend.png';
 import games from './icons/games.png';
@@ -38,6 +39,8 @@ import typescript from './tech/typescript.png';
 import graphql from './tech/graphql.png';
 import postgresql from './tech/postgresql.png';
 import rubyrails from './tech/rubyrails.png';
+import unity from './tech/unity.png';
+import android from './tech/android.png';
 
 import coverhunt from './company/coverhunt.png';
 import acid from './company/acid.jpg';
@@ -133,5 +136,8 @@ export {
   platzito,
   spaceman,
   pongx,
-  montes
+  montes,
+  unity,
+  android,
+  astronaut
 };
