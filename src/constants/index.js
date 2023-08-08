@@ -160,6 +160,7 @@ const projects = [
     ],
     image: easy,
     demo: 'https://play.google.com/store/apps/details?id=com.cencosud.easy.cl&pli=1',
+    repo:''
   },
   {
     id: 'project-2',
@@ -181,6 +182,7 @@ const projects = [
     ],
     image: todoPago,
     demo: 'https://play.google.com/store/apps/details?id=com.prisma.todopago2&hl=es_CR',
+    repo:''
   },
   {
     id: 'project-3',
@@ -202,6 +204,7 @@ const projects = [
     ],
     image: horneo,
     demo: 'https://play.google.com/store/apps/details?id=com.tostao.pedidos',
+    repo:''
   },
   {
     id: 'project-4',
@@ -223,6 +226,7 @@ const projects = [
     ],
     image: pagaTodo,
     demo: 'https://play.google.com/store/apps/details?id=pagatodo.datacenter.com.pagatodo&pli=1',
+    repo: ''
   },
   {
     id: 'project-5',
@@ -267,6 +271,7 @@ const projects = [
     ],
     image: movies,
     demo: 'https://play.google.com/store/apps/details?id=com.felipechauxlab.movieslibrarydb&hl=es_CR',
+    repo: ''
   }
 ];
 
@@ -313,6 +318,7 @@ const projectsTwo = [
     ],
     image: actpol,
     demo: 'https://masnoticia.com/kpa-a-lansa-oficialmente-nan-mobile-actpol-app-pa-asina-facilita-e-trabou-y-siguridad-di-cada-agente-policial-riba-nos-isla/',
+    repo: ''
   }
 ];
 
@@ -336,7 +342,8 @@ const projectGames = [
       },
     ],
     image: platzito,
-    demo: 'https://constelaciongames.itch.io/platzito'
+    demo: 'https://constelaciongames.itch.io/platzito',
+    repo: ''
   },
   {
     id: 'game-2',
@@ -357,7 +364,8 @@ const projectGames = [
       },
     ],
     image: spaceman,
-    demo: 'https://constelaciongames.itch.io/spaceman'
+    demo: 'https://constelaciongames.itch.io/spaceman',
+    repo: 'https://github.com/felipechaux/unityGames/tree/master/SpaceMan'
   },
   {
     id: 'game-3',
@@ -378,7 +386,8 @@ const projectGames = [
       },
     ],
     image: pongx,
-    demo: 'https://constelaciongames.itch.io/pongx'
+    demo: 'https://constelaciongames.itch.io/pongx',
+    repo: 'https://github.com/felipechaux/unityGames/tree/master/PongPlatzi'
   },
   {
     id: 'game-4',
@@ -399,7 +408,8 @@ const projectGames = [
       },
     ],
     image: montes,
-    demo: 'https://constelaciongames.itch.io/montes-de-maria'
+    demo: 'https://constelaciongames.itch.io/montes-de-maria',
+    repo: 'https://github.com/felipechaux/games/tree/master/phaser/game-feels'
   }
 ];
 
