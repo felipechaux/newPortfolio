@@ -4,7 +4,7 @@ import whiteabstract from './backgrounds/white-abstract.png';
 
 import logo from './logo/logo-black.png';
 import logotext from './logo/logo-text-black.png';
-import feli from './personal/felipe2.png';
+import feli from './personal/feli.png';
 import astronaut from './logo/helmet.png';
 
 import backend from './icons/backend.png';
