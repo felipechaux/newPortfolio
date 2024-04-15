@@ -160,7 +160,7 @@ const projects = [
     ],
     image: easy,
     demo: 'https://play.google.com/store/apps/details?id=com.cencosud.easy.cl&pli=1',
-    repo:''
+    repo: ''
   },
   {
     id: 'project-2',
@@ -182,7 +182,7 @@ const projects = [
     ],
     image: todoPago,
     demo: 'https://play.google.com/store/apps/details?id=com.prisma.todopago2&hl=es_CR',
-    repo:''
+    repo: ''
   },
   {
     id: 'project-3',
@@ -204,7 +204,7 @@ const projects = [
     ],
     image: horneo,
     demo: 'https://play.google.com/store/apps/details?id=com.tostao.pedidos',
-    repo:''
+    repo: ''
   },
   {
     id: 'project-4',
@@ -249,7 +249,7 @@ const projects = [
     ],
     image: inproext,
     repo: 'https://github.com/felipechaux/flutter/tree/master/inproext_app',
-    demo: 'https://play.google.com/store/apps/details?id=com.inproext.inproextapp',
+    demo: 'https://apkcombo.com/inproextapp/com.inproext.inproextapp/',
   },
   {
     id: 'project-6',
