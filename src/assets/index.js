@@ -25,6 +25,7 @@ import sendHover from './icons/sendHover.png';
 import mobile from './icons/app-development.png';
 import game from './icons/game-development.png';
 
+import flutter from './tech/flutter.png';
 import css from './tech/css.png';
 import docker from './tech/docker.png';
 import figma from './tech/figma.png';
@@ -32,7 +33,7 @@ import git from './tech/git.png';
 import html from './tech/html.png';
 import javascript from './tech/javascript.png';
 import nodejs from './tech/nodejs.png';
-import reactjs from './tech/reactjs.png';
+import reactjs from './tech/react.png';
 import redux from './tech/redux.png';
 import tailwind from './tech/tailwind.png';
 import typescript from './tech/typescript.png';
@@ -41,8 +42,11 @@ import postgresql from './tech/postgresql.png';
 import rubyrails from './tech/rubyrails.png';
 import unity from './tech/unity.png';
 import android from './tech/android.png';
+import swift from './tech/swift.png';
 
 import coverhunt from './company/coverhunt.png';
+import quicksite from './company/quicksite.jpeg';
+import kanguro from './company/kanguro.jpg';
 import acid from './company/acid.jpg';
 import globant from './company/globant.png';
 import dcc from './company/dcc.png';
@@ -139,5 +143,9 @@ export {
   montes,
   unity,
   android,
-  astronaut
+  astronaut,
+  flutter,
+  swift,
+  quicksite,
+  kanguro
 };

@@ -27,7 +27,11 @@ import {
   pongx,
   montes,
   unity,
-  android
+  android,
+  flutter,
+  swift,
+  quicksite,
+  kanguro
 } from '../assets';
 
 export const navLinks = [
@@ -66,6 +70,14 @@ const technologies = [
     icon: android,
   },
   {
+    name: 'Swift',
+    icon: swift,
+  },
+  {
+    name: 'Flutter',
+    icon: flutter,
+  },
+  {
     name: 'Unity',
     icon: unity,
   },
@@ -89,11 +101,25 @@ const technologies = [
 
 const experiences = [
   {
+    title: 'Mobile Engineer',
+    company_name: 'Kanguro Insurance',
+    icon: kanguro,
+    iconBg: '#FFFFFF',
+    date: 'Sep 2024 - Present',
+  },
+  {
+    title: 'Mobile Developer',
+    company_name: 'Quicksite Guru',
+    icon: quicksite,
+    iconBg: '#FFFFFF',
+    date: 'Jun 2024 - Aug 2024',
+  },
+  {
     title: 'Mobile Software Engineer V',
     company_name: 'Acid Labs',
     icon: acid,
     iconBg: '#FFFFFF',
-    date: 'Sep 2022 - Present',
+    date: 'Sep 2022 - Oct 2023',
   },
   {
     title: 'Android Mobile Developer',

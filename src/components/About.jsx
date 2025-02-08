@@ -37,10 +37,7 @@ const About = () => {
       <motion.p
         variants={fadeIn('', '', 0.1, 1)}
         className="mt-4 text-taupe text-[18px] max-w-3xl leading-[30px]">
-           I am Systems engineer with 6 years of experience in the software development field.
-             I’m strongly skilled in Android development working with Kotlin and Java,
-              also I have been working on hybrid Apps for Android/IOS with Flutter 
-              and finally I also worked on some VideoGames using C# and JavaScript.
+        I am a Software Developer with 7 years of expertise in analyzing, designing, and developing innovative mobile applications using Kotlin, Java, and Flutter. Bachelor's degree in systems engineering. Experienced in developing apps across various industries, including Fintech, E-commerce, Gaming, and Education. Proficient in integrating third-party libraries such as biometric SDKs, optical character recognition, and analytics. Passionate about leveraging the latest technologies within the Android ecosystem to enhance user experiences. I am skilled in collaborating with UI/UX designers and backend developers to provide optimal user-centric solutions.
       </motion.p>
 
       <div className="mt-20 flex flex-wrap gap-10">
