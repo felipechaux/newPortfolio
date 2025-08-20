@@ -34,7 +34,7 @@ const Navbar = () => {
           {navLinks.map((nav) => (
             <li
               key={nav.id}
-              className={`${
+              className={`$
                 active === nav.title ? 'text-french' : 'text-eerieBlack'
               } hover:text-taupe text-[21px] font-medium font-mova 
                 uppercase tracking-[3px] cursor-pointer nav-links`}
@@ -42,6 +42,9 @@ const Navbar = () => {
               <a href={`#${nav.id}`}>{nav.title}</a>
             </li>
           ))}
+          <li className="text-eerieBlack hover:text-taupe text-[21px] font-medium font-mova uppercase tracking-[3px] cursor-pointer nav-links">
+            <Link to="/privacy-policy">Privacy Policy</Link>
+          </li>
         </ul>
 
         {/* mobile */}
@@ -67,7 +70,7 @@ const Navbar = () => {
                   <li
                     id={nav.id}
                     key={nav.id}
-                    className={`${
+                    className={`$
                       active === nav.title ? 'text-french' : 'text-eerieBlack'
                     } text-[88px] font-bold font-arenq 
                       uppercase tracking-[1px] cursor-pointer`}
@@ -78,6 +81,9 @@ const Navbar = () => {
                     <a href={`#${nav.id}`}>{nav.title}</a>
                   </li>
                 ))}
+                <li className="text-eerieBlack hover:text-taupe text-[44px] font-bold font-arenq uppercase tracking-[1px] cursor-pointer mt-8">
+                  <Link to="/privacy-policy" onClick={() => setToggle(false)}>Privacy Policy</Link>
+                </li>
               </ul>
             </div>
           ) : (
