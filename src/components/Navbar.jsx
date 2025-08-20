@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { styles } from '../styles';
 import { navLinks } from '../constants';
 import { close, menu, logo, logotext, astronaut } from '../assets';
@@ -7,6 +7,10 @@ import { close, menu, logo, logotext, astronaut } from '../assets';
 const Navbar = () => {
   const [active, setActive] = useState('');
   const [toggle, setToggle] = useState(false);
+
+  const location = typeof window !== 'undefined' ? window.location : { pathname: '/' };
+  // fallback for SSR or test environments
+  const currentPath = location.pathname;
 
   return (
     <nav
@@ -42,9 +46,11 @@ const Navbar = () => {
               <a href={`#${nav.id}`}>{nav.title}</a>
             </li>
           ))}
-          <li className="text-eerieBlack hover:text-taupe text-[21px] font-medium font-mova uppercase tracking-[3px] cursor-pointer nav-links">
-            <Link to="/privacy-policy">Privacy Policy</Link>
-          </li>
+          {currentPath !== '/' && (
+            <li className="text-eerieBlack hover:text-taupe text-[21px] font-medium font-mova uppercase tracking-[3px] cursor-pointer nav-links">
+              <Link to="/privacy-policy">Privacy Policy</Link>
+            </li>
+          )}
         </ul>
 
         {/* mobile */}
@@ -81,9 +87,11 @@ const Navbar = () => {
                     <a href={`#${nav.id}`}>{nav.title}</a>
                   </li>
                 ))}
-                <li className="text-eerieBlack hover:text-taupe text-[44px] font-bold font-arenq uppercase tracking-[1px] cursor-pointer mt-8">
-                  <Link to="/privacy-policy" onClick={() => setToggle(false)}>Privacy Policy</Link>
-                </li>
+                {currentPath !== '/' && (
+                  <li className="text-eerieBlack hover:text-taupe text-[44px] font-bold font-arenq uppercase tracking-[1px] cursor-pointer mt-8">
+                    <Link to="/privacy-policy" onClick={() => setToggle(false)}>Privacy Policy</Link>
+                  </li>
+                )}
               </ul>
             </div>
           ) : (
