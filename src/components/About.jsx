@@ -37,7 +37,7 @@ const About = () => {
       <motion.p
         variants={fadeIn('', '', 0.1, 1)}
         className="mt-4 text-taupe text-[18px] max-w-3xl leading-[30px]">
-        I am a Software Developer with 7 years of expertise in analyzing, designing, and developing innovative mobile applications using Kotlin, Java, and Flutter. Bachelor's degree in systems engineering. Experienced in developing apps across various industries, including Fintech, E-commerce, Gaming, and Education. Proficient in integrating third-party libraries such as biometric SDKs, optical character recognition, and analytics. Passionate about leveraging the latest technologies within the Android ecosystem to enhance user experiences. I am skilled in collaborating with UI/UX designers and backend developers to provide optimal user-centric solutions.
+        Software Developer with 8 years of expertise in analyzing, designing, and developing innovative mobile applications using Kotlin, Swift, and Flutter. Systems Engineer focused on high-scalability architectures. Recently, I successfully integrated Kotlin Multiplatform (KMP) into existing native Android and iOS apps. I architected this transition by creating an independent module and distributing it via Swift Package, achieving 30% code sharing across platforms.Experienced in Fintech, E-commerce, and Gaming, with deep proficiency in biometric SDKs and OCR. I am passionate about optimizing development lifecycles through modern cross-platform solutions while maintaining native performance and high-quality UI/UX.
       </motion.p>
 
       <div className="mt-20 flex flex-wrap gap-10">

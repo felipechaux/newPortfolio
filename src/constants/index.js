@@ -31,7 +31,9 @@ import {
   flutter,
   swift,
   quicksite,
-  kanguro
+  kanguro,
+  space,
+  galaxySnap
 } from '../assets';
 
 export const navLinks = [
@@ -167,6 +169,29 @@ const experiences = [
 
 const projects = [
   {
+    id: 'project-0',
+    name: 'Kanguro Insurance',
+    description: 'Kotlin Multiplatform App for Pet & Health Insurance - iOS & Android',
+    tags: [
+      {
+        name: 'kotlin-multiplatform',
+        color: 'blue-text-gradient',
+      },
+      {
+        name: 'swift',
+        color: 'green-text-gradient',
+      },
+      {
+        name: 'compose',
+        color: 'pink-text-gradient',
+      },
+    ],
+    image: kanguro,
+    demo: 'https://apps.apple.com/us/app/kanguro/id1625776781',
+    play_store: 'https://play.google.com/store/apps/details?id=com.insurtech.kanguro&hl=en',
+    repo: ''
+  },
+  {
     id: 'project-1',
     name: 'EasyApp',
     description: 'Retail App for Chile - buy whatever you want',
@@ -208,6 +233,28 @@ const projects = [
     ],
     image: todoPago,
     demo: 'https://play.google.com/store/apps/details?id=com.prisma.todopago2&hl=es_CR',
+    repo: ''
+  },
+  {
+    id: 'project-6',
+    name: 'GalaxySnap',
+    description: 'NASA Astronomy Picture of the Day App',
+    tags: [
+      {
+        name: 'kotlin',
+        color: 'blue-text-gradient',
+      },
+      {
+        name: 'restapi',
+        color: 'green-text-gradient',
+      },
+      {
+        name: 'android',
+        color: 'pink-text-gradient',
+      },
+    ],
+    image: galaxySnap,
+    demo: 'https://play.google.com/store/apps/details?id=com.chauxdev.nasaapp',
     repo: ''
   },
   {
@@ -276,28 +323,6 @@ const projects = [
     image: inproext,
     repo: 'https://github.com/felipechaux/flutter/tree/master/inproext_app',
     demo: 'https://apkcombo.com/inproextapp/com.inproext.inproextapp/',
-  },
-  {
-    id: 'project-6',
-    name: 'Movies Library DB App',
-    description: 'Data Base of current Movies on Cinema',
-    tags: [
-      {
-        name: 'react',
-        color: 'blue-text-gradient',
-      },
-      {
-        name: 'mongodb',
-        color: 'green-text-gradient',
-      },
-      {
-        name: 'tailwind',
-        color: 'pink-text-gradient',
-      },
-    ],
-    image: movies,
-    demo: 'https://play.google.com/store/apps/details?id=com.felipechauxlab.movieslibrarydb&hl=es_CR',
-    repo: ''
   }
 ];
 

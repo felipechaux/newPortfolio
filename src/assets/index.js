@@ -76,6 +76,7 @@ import platzito from './projects/platzito.png';
 import spaceman from './projects/spaceman.png';
 import pongx from './projects/pongx.png';
 import montes from './projects/montes.png';
+import galaxySnap from './projects/galaxysnap.png';
 
 export {
   nairobi,
@@ -147,5 +148,6 @@ export {
   flutter,
   swift,
   quicksite,
-  kanguro
+  kanguro,
+  galaxySnap
 };

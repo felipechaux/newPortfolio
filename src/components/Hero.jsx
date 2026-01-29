@@ -39,7 +39,8 @@ const Hero = () => {
               </span>
             </h1>
             <p className={`${styles.heroSubText} mt-2 text-eerieBlack`}>
-              I love building Apps
+              Mobile Developer <br className="sm:block hidden" />
+              (Android & iOS)
             </p>
           </div>
           <div
