@@ -8,24 +8,24 @@ const PrivacyPolicy = () => (
         <svg width="100%" height="100%" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <radialGradient id="bgGradient" cx="50%" cy="50%" r="80%">
-              <stop offset="0%" stopColor="#3a3a7c"/>
-              <stop offset="100%" stopColor="#0a0a23"/>
+              <stop offset="0%" stopColor="#3a3a7c" />
+              <stop offset="100%" stopColor="#0a0a23" />
             </radialGradient>
             <linearGradient id="swirlGradient" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stopColor="#b3e0ff"/>
-              <stop offset="100%" stopColor="#4f8cff"/>
+              <stop offset="0%" stopColor="#b3e0ff" />
+              <stop offset="100%" stopColor="#4f8cff" />
             </linearGradient>
           </defs>
-          <rect width="512" height="512" rx="110" fill="url(#bgGradient)"/>
+          <rect width="512" height="512" rx="110" fill="url(#bgGradient)" />
           {/* Galaxy swirl */}
-          <path d="M256 180c-60 0-108 36-108 80s48 80 108 80 108-36 108-80" stroke="url(#swirlGradient)" strokeWidth="18" fill="none" strokeLinecap="round"/>
+          <path d="M256 180c-60 0-108 36-108 80s48 80 108 80 108-36 108-80" stroke="url(#swirlGradient)" strokeWidth="18" fill="none" strokeLinecap="round" />
           {/* Central planet */}
-          <circle cx="256" cy="260" r="44" fill="#fff" fillOpacity="0.95"/>
+          <circle cx="256" cy="260" r="44" fill="#fff" fillOpacity="0.95" />
           {/* Orbit ring */}
-          <ellipse cx="256" cy="260" rx="80" ry="24" fill="none" stroke="#ffd700" strokeWidth="6" strokeDasharray="8 10"/>
+          <ellipse cx="256" cy="260" rx="80" ry="24" fill="none" stroke="#ffd700" strokeWidth="6" strokeDasharray="8 10" />
           {/* News signal (RSS arc) */}
-          <path d="M320 200a60 60 0 0 1 60 60" stroke="#ffd700" strokeWidth="8" fill="none" strokeLinecap="round"/>
-          <circle cx="320" cy="260" r="10" fill="#ffd700"/>
+          <path d="M320 200a60 60 0 0 1 60 60" stroke="#ffd700" strokeWidth="8" fill="none" strokeLinecap="round" />
+          <circle cx="320" cy="260" r="10" fill="#ffd700" />
         </svg>
       </div>
       <h1 className="text-3xl font-bold mb-2">SnapGalaxy Privacy Policy</h1>
@@ -69,7 +69,7 @@ const PrivacyPolicy = () => (
     <section className="mb-6">
       <h2 className="text-xl font-semibold mb-2">6. Contact</h2>
       <p>
-        If you have any questions or concerns about this Privacy Policy, please contact us at: <strong>chaux72@gmail.com</strong>
+        If you have any questions or concerns about this Privacy Policy, please contact us at: <strong>felchax@gmail.com</strong>
       </p>
     </section>
     <footer className="text-center text-xs text-gray-400 mt-8">

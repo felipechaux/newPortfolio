@@ -72,7 +72,7 @@ export const translations = {
                 error: "Something went wrong. Please try again."
             }
         },
-        footer: { copyright: "© 2025 DadoMatch · ChauxDevApps", contact: "Contact" }
+        footer: { copyright: "© 2025 DadoMatch · ChauxDevApps", contact: "Contact", privacy: "Privacy Policy" }
     },
     es: {
         nav: { how: "Cómo funciona", features: "Características", screenshots: "Capturas", download: "Descargar" },
@@ -147,6 +147,6 @@ export const translations = {
                 error: "Algo salió mal. Por favor, inténtalo de nuevo."
             }
         },
-        footer: { copyright: "© 2025 DadoMatch · ChauxDevApps", contact: "Contacto" }
+        footer: { copyright: "© 2025 DadoMatch · ChauxDevApps", contact: "Contacto", privacy: "Privacidad" }
     }
 };

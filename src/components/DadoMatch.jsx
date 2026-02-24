@@ -410,7 +410,9 @@ const DadoMatch = () => {
                 <span className="dm-footer-sep">·</span>
                 <a href="https://github.com/felipechaux" target="_blank" rel="noreferrer">GitHub</a>
                 <span className="dm-footer-sep">·</span>
-                <a href="mailto:felipechaux@gmail.com">{t.footer.contact}</a>
+                <Link to="/dadomatch/privacy">{t.footer.privacy}</Link>
+                <span className="dm-footer-sep">·</span>
+                <a href="mailto:felchax@gmail.com">{t.footer.contact}</a>
             </footer>
         </div>
     );
