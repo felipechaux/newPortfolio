@@ -77,6 +77,7 @@ import spaceman from './projects/spaceman.png';
 import pongx from './projects/pongx.png';
 import montes from './projects/montes.png';
 import galaxySnap from './projects/galaxysnap.png';
+import dadomatch from './projects/dadomatch_feature.png';
 
 export {
   nairobi,
@@ -149,5 +150,6 @@ export {
   swift,
   quicksite,
   kanguro,
-  galaxySnap
+  galaxySnap,
+  dadomatch
 };

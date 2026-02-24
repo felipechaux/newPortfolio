@@ -33,7 +33,8 @@ import {
   quicksite,
   kanguro,
   space,
-  galaxySnap
+  galaxySnap,
+  dadomatch
 } from '../assets';
 
 export const navLinks = [
@@ -168,6 +169,28 @@ const experiences = [
 ];
 
 const projects = [
+  {
+    id: 'project-dadomatch',
+    name: 'DadoMatch',
+    description: 'AI-Powered Social Icebreaker App - Less scroll, more action. Let AI generate the perfect opener based on your environment.',
+    tags: [
+      {
+        name: 'kmp',
+        color: 'blue-text-gradient',
+      },
+      {
+        name: 'ai',
+        color: 'green-text-gradient',
+      },
+      {
+        name: 'compose',
+        color: 'pink-text-gradient',
+      },
+    ],
+    image: dadomatch,
+    demo: '/dadomatch',
+    repo: ''
+  },
   {
     id: 'project-0',
     name: 'Kanguro Insurance',

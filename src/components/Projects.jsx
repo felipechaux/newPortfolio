@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { SectionWrapper } from '../hoc';
 import { styles } from '../styles';
@@ -20,6 +21,7 @@ const ProjectCard = ({
   active,
   handleClick,
 }) => {
+  const navigate = useNavigate();
   return (
     <motion.div
       variants={fadeIn('right', 'spring', index * 0.5, 0.75)}
@@ -91,7 +93,14 @@ const ProjectCard = ({
                 sm:mt-[22px] mt-[16px] hover:bg-battleGray 
                 hover:text-eerieBlack transition duration-[0.2s] 
                 ease-in-out"
-                  onClick={() => window.open(demo, '_blank')}
+                  onClick={() => {
+                    if (demo.startsWith('/')) {
+                      navigate(demo);
+                      window.scrollTo(0, 0);
+                    } else {
+                      window.open(demo, '_blank');
+                    }
+                  }}
                   onMouseOver={() => {
                     document
                       .querySelector('.btn-icon')

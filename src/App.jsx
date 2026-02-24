@@ -9,6 +9,7 @@ import {
   Projects,
 } from './components';
 import PrivacyPolicy from './components/PrivacyPolicy';
+import DadoMatch from './components/DadoMatch';
 
 const App = () => {
   return (
@@ -52,6 +53,10 @@ const App = () => {
               <PrivacyPolicy />
             </>
           }
+        />
+        <Route
+          path="/dadomatch"
+          element={<DadoMatch />}
         />
       </Routes>
     </BrowserRouter>
