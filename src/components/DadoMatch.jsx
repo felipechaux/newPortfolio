@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import emailjs from '@emailjs/browser';
 import { motion, useAnimation, useInView, useScroll, useTransform } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import dm_screen1 from '../assets/projects/dadomatch_screen1.png';
@@ -8,8 +9,8 @@ import dm_screen4 from '../assets/projects/dadomatch_screen4.png';
 import dm_screen5 from '../assets/projects/dadomatch_screen5.png';
 import dm_feature from '../assets/projects/dadomatch_feature.png';
 import dm_video from '../assets/projects/dadomatch_hero.mp4';
-/* Note: I'm assuming dadomatch_hero.mp4 will be the filename for the video prepared by the user. 
-   If it's different, I'll update it later. */
+import dm_logo from '../assets/projects/dadomatch_logo.jpg';
+import { translations } from '../constants/dadomatchTranslations';
 
 /* ─── Reusable fade-in-up animation ─────────────────────────── */
 const FadeUp = ({ children, delay = 0, className = '' }) => {
@@ -56,36 +57,117 @@ const screenshotCaptions = [
     'Track your social progress',
 ];
 
-const ScreenshotCarousel = () => {
+const ScreenshotCarousel = ({ language }) => {
     const [active, setActive] = useState(0);
+    const captions = translations[language].screenshots.captions;
+
     useEffect(() => {
-        const t = setInterval(() => setActive(p => (p + 1) % screenshots.length), 3200);
-        return () => clearInterval(t);
+        const interval = setInterval(() => {
+            setActive((prev) => (prev + 1) % 5);
+        }, 4000);
+        return () => clearInterval(interval);
     }, []);
+
     return (
         <div className="dm-carousel-wrap">
             <div className="dm-carousel-images">
-                {screenshots.map((src, i) => (
+                {[dm_screen1, dm_screen2, dm_screen3, dm_screen4, dm_screen5].map((img, i) => (
                     <motion.div
                         key={i}
                         className="dm-carousel-item"
-                        animate={{ opacity: i === active ? 1 : 0, scale: i === active ? 1 : 0.92, zIndex: i === active ? 2 : 1 }}
-                        transition={{ duration: 0.6 }}
+                        initial={{ opacity: 0, x: 20 }}
+                        animate={{
+                            opacity: active === i ? 1 : 0,
+                            x: active === i ? 0 : 20,
+                            scale: active === i ? 1 : 0.95
+                        }}
+                        transition={{ duration: 0.6, ease: "easeOut" }}
                     >
-                        <img src={src} alt={screenshotCaptions[i]} className="dm-carousel-img" />
+                        <img src={img} alt={`Screen ${i + 1}`} className="dm-carousel-img" />
                     </motion.div>
                 ))}
             </div>
             <div className="dm-carousel-dots">
-                {screenshots.map((_, i) => (
+                {[0, 1, 2, 3, 4].map((i) => (
                     <button
                         key={i}
-                        className={`dm-dot${i === active ? ' dm-dot-active' : ''}`}
+                        className={`dm-dot ${active === i ? 'dm-dot-active' : ''}`}
                         onClick={() => setActive(i)}
                     />
                 ))}
             </div>
-            <p className="dm-carousel-caption">{screenshotCaptions[active]}</p>
+            <p className="dm-carousel-caption">{captions[active]}</p>
+        </div>
+    );
+};
+
+/* ─── Early Access Form ───────────────────────────── */
+const EarlyAccessForm = ({ t }) => {
+    const [form, setForm] = useState({ name: '', email: '' });
+    const [loading, setLoading] = useState(false);
+    const [status, setStatus] = useState(null); // 'success' | 'error'
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        setLoading(true);
+        setStatus(null);
+
+        emailjs
+            .send(
+                'service_r77g6uq',
+                'template_8mtok6j',
+                {
+                    from_name: form.name,
+                    to_name: 'Felipe',
+                    from_email: form.email,
+                    to_email: 'felchax@gmail.com',
+                    message: `EARLY ACCESS REQUEST for DadoMatch Android. User: ${form.name} (${form.email})`,
+                },
+                'q3RoWKQusixcwHgIq'
+            )
+            .then(() => {
+                setLoading(false);
+                setStatus('success');
+                setForm({ name: '', email: '' });
+            })
+            .catch((error) => {
+                setLoading(false);
+                setStatus('error');
+                console.error(error);
+            });
+    };
+
+    return (
+        <div className="dm-ea-form-wrap">
+            <div className="mb-4 text-left">
+                <h3 className="text-lg font-bold text-white mb-1">{t.cta.form.title}</h3>
+                <p className="text-sm text-white/50">{t.cta.form.subtitle}</p>
+            </div>
+            <form onSubmit={handleSubmit} className="dm-ea-form">
+                <div className="dm-ea-inputs">
+                    <input
+                        required
+                        type="text"
+                        placeholder={t.cta.form.placeholderName}
+                        value={form.name}
+                        onChange={(e) => setForm({ ...form, name: e.target.value })}
+                        className="dm-ea-input"
+                    />
+                    <input
+                        required
+                        type="email"
+                        placeholder={t.cta.form.placeholderEmail}
+                        value={form.email}
+                        onChange={(e) => setForm({ ...form, email: e.target.value })}
+                        className="dm-ea-input"
+                    />
+                </div>
+                <button type="submit" disabled={loading} className="dm-ea-submit">
+                    {loading ? t.cta.form.submitting : t.cta.form.submit}
+                </button>
+            </form>
+            {status === 'success' && <p className="dm-ea-message success">{t.cta.form.success}</p>}
+            {status === 'error' && <p className="dm-ea-message error">{t.cta.form.error}</p>}
         </div>
     );
 };
@@ -103,7 +185,11 @@ const StepCard = ({ num, title, desc, delay }) => (
 
 /* ─── Main Page ──────────────────────────────────────────────── */
 const DadoMatch = () => {
+    const [isMuted, setIsMuted] = useState(true);
+    const [language, setLanguage] = useState('en');
     const { scrollY } = useScroll();
+
+    const t = translations[language];
 
     // MonAI-style scroll transforms + PiP transition
     const scale = useTransform(scrollY, [0, 600], [1, 0.45]);
@@ -120,16 +206,34 @@ const DadoMatch = () => {
             {/* NAV */}
             <nav className="dm-nav">
                 <div
-                    className="dm-nav-logo cursor-pointer"
+                    className="dm-nav-logo cursor-pointer flex items-center gap-2"
                     onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                 >
-                    🎲 DadoMatch
+                    <img src={dm_logo} alt="DadoMatch Logo" className="w-8 h-8 rounded-lg object-contain" />
+                    <span>DadoMatch</span>
                 </div>
                 <div className="dm-nav-links">
-                    <a href="#dm-how">How It Works</a>
-                    <a href="#dm-features">Features</a>
-                    <a href="#dm-screenshots">Screenshots</a>
-                    <a href="https://play.google.com/store/apps/details?id=com.chauxdevapps.dadomatch" target="_blank" rel="noreferrer" className="dm-nav-cta">Download</a>
+                    <a href="#dm-how">{t.nav.how}</a>
+                    <a href="#dm-features">{t.nav.features}</a>
+                    <a href="#dm-screenshots">{t.nav.screenshots}</a>
+
+                    {/* Language Toggle */}
+                    <div className="dm-lang-toggle">
+                        <button
+                            className={`dm-lang-btn ${language === 'en' ? 'active' : ''}`}
+                            onClick={() => setLanguage('en')}
+                        >
+                            EN
+                        </button>
+                        <button
+                            className={`dm-lang-btn ${language === 'es' ? 'active' : ''}`}
+                            onClick={() => setLanguage('es')}
+                        >
+                            ES
+                        </button>
+                    </div>
+
+                    <a href="#dm-cta" className="dm-nav-cta">{t.nav.download}</a>
                 </div>
             </nav>
 
@@ -139,41 +243,26 @@ const DadoMatch = () => {
 
                 <motion.div style={{ opacity: heroContentOpacity }} className="dm-hero-content">
                     <FadeUp delay={0}>
-                        <div className="dm-badge">Social Icebreaker App</div>
+                        <div className="dm-badge">{t.hero.badge}</div>
                     </FadeUp>
                     <FadeUp delay={0.1}>
                         <h1 className="dm-hero-title">
-                            Less scroll,<br />
-                            <span className="dm-gradient-text dm-glow-text">more action.</span>
+                            {t.hero.title1}<br />
+                            <span className="dm-gradient-text dm-glow-text">{t.hero.title2}</span>
                         </h1>
                     </FadeUp>
                     <FadeUp delay={0.2}>
                         <p className="dm-hero-subtitle">
-                            Pick your environment, choose your intensity, and let AI generate
-                            the perfect icebreaker. Roll the dice — spark the conversation.
+                            {t.hero.subtitle}
                         </p>
                     </FadeUp>
                     <FadeUp delay={0.3} className="dm-hero-pills">
-                        <span className="dm-pill">🎉 Party</span>
-                        <span className="dm-pill">❤️ Romantic</span>
-                        <span className="dm-pill dm-pill-hot">🌶️ Spicy</span>
-                        <span className="dm-pill">☕ Café</span>
+                        {t.hero.pills.map((pill, i) => (
+                            <span key={i} className={`dm-pill ${pill.includes('🌶️') ? 'dm-pill-hot' : ''}`}>{pill}</span>
+                        ))}
                     </FadeUp>
-                    <FadeUp delay={0.4} className="dm-hero-ctas">
-                        <a
-                            href="https://play.google.com/store/apps/details?id=com.chauxdevapps.dadomatch"
-                            target="_blank" rel="noreferrer"
-                            className="dm-btn dm-btn-primary"
-                        >
-                            📱 Google Play
-                        </a>
-                        <a
-                            href="https://apps.apple.com/app/dadomatch"
-                            target="_blank" rel="noreferrer"
-                            className="dm-btn dm-btn-secondary"
-                        >
-                            App Store
-                        </a>
+                    <FadeUp delay={0.4}>
+                        <EarlyAccessForm t={t} />
                     </FadeUp>
                 </motion.div>
 
@@ -195,17 +284,30 @@ const DadoMatch = () => {
                     >
                         <motion.div
                             style={{ borderRadius: radius }}
-                            className="dm-video-frame"
+                            className="dm-video-frame group cursor-pointer"
+                            onClick={() => setIsMuted(!isMuted)}
                         >
                             <video
                                 src={dm_video}
                                 autoPlay
                                 loop
-                                muted
+                                muted={isMuted}
                                 playsInline
                                 className="dm-hero-video"
                                 poster={dm_feature}
                             />
+                            {/* Sound Toggle Overlay */}
+                            <button
+                                className="dm-sound-toggle"
+                                onClick={() => setIsMuted(!isMuted)}
+                                aria-label={isMuted ? "Unmute video" : "Mute video"}
+                            >
+                                {isMuted ? (
+                                    <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77zM3 9v6h4l5 5V4L7 9H3z" /></svg>
+                                ) : (
+                                    <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M7 9v6h4l5 5V4l-5 5H7z" /></svg>
+                                )}
+                            </button>
                         </motion.div>
                     </motion.div>
                 </div>
@@ -214,72 +316,62 @@ const DadoMatch = () => {
             {/* HOW IT WORKS */}
             <section id="dm-how" className="dm-section relative z-10 bg-[#060914]">
                 <FadeUp>
-                    <p className="dm-section-eyebrow">Simple by design</p>
-                    <h2 className="dm-section-title">How It Works</h2>
+                    <p className="dm-section-eyebrow">{t.how.eyebrow}</p>
+                    <h2 className="dm-section-title">{t.how.title}</h2>
                 </FadeUp>
                 <div className="dm-steps">
-                    <StepCard num="01" title="Pick an Environment" desc="Gym, Party, Library, Café, Bar — choose the social context that fits." delay={0.1} />
-                    <StepCard num="02" title="Set the Intensity" desc="Cringe, Romantic, Direct, Spicy — dial up or down the energy of your icebreaker." delay={0.2} />
-                    <StepCard num="03" title="Roll the Dice" desc="Tap LAUNCH. Generative AI crafts a perfect, context-aware opener instantly." delay={0.3} />
-                    <StepCard num="04" title="Track your Rizz" desc="Rate each icebreaker 🔥 Top or 💀 Cringe and watch your social score grow." delay={0.4} />
+                    {t.how.steps.map((step, i) => (
+                        <StepCard key={step.num} num={step.num} title={step.title} desc={step.desc} delay={0.1 * (i + 1)} />
+                    ))}
                 </div>
             </section>
 
             {/* FEATURES */}
             <section id="dm-features" className="dm-section dm-section-dark">
                 <FadeUp>
-                    <p className="dm-section-eyebrow">Everything you need</p>
-                    <h2 className="dm-section-title">Features</h2>
+                    <p className="dm-section-eyebrow">{t.features.eyebrow}</p>
+                    <h2 className="dm-section-title">{t.features.title}</h2>
                 </FadeUp>
                 <div className="dm-features-grid">
-                    <FeatureCard icon="🤖" title="AI-Powered Icebreakers" description="Generative AI reads the room — every opener is unique and tailored to your chosen environment and intensity." delay={0.1} />
-                    <FeatureCard icon="🎲" title="Roll the Dice" description="One tap. Instant magic. No awkward silence, no generic pickup lines — just perfectly timed conversation starters." delay={0.15} />
-                    <FeatureCard icon="🌍" title="Any Environment" description="Gym, party, café, library, bar — the app adapts its style to wherever you are in the world." delay={0.2} />
-                    <FeatureCard icon="🌶️" title="Adjustable Intensity" description="Keep it light and funny or turn up the heat. You're always in control of the vibe." delay={0.25} />
-                    <FeatureCard icon="⭐" title="Favorites" description="Save the lines that worked. Build your own personal collection of top openers." delay={0.3} />
-                    <FeatureCard icon="📈" title="Progress Tracking" description="See your social wins. Track which icebreakers landed and improve your Rizz over time." delay={0.35} />
-                    <FeatureCard icon="🔐" title="Google & Apple Sign-In" description="Secure, easy login. Your favorites and history follow you across iOS and Android." delay={0.4} />
-                    <FeatureCard icon="✨" title="Free & Pro" description="Start free with daily rolls. Go Pro for unlimited launches and exclusive environments." delay={0.45} />
+                    {t.features.list.map((f, i) => (
+                        <FeatureCard key={i} icon={f.icon} title={f.title} description={f.desc} delay={0.1 + (i * 0.05)} />
+                    ))}
                 </div>
             </section>
 
             {/* SCREENSHOTS */}
             <section id="dm-screenshots" className="dm-section">
                 <FadeUp>
-                    <p className="dm-section-eyebrow">See it in action</p>
-                    <h2 className="dm-section-title">App Screenshots</h2>
+                    <p className="dm-section-eyebrow">{t.screenshots.eyebrow}</p>
+                    <h2 className="dm-section-title">{t.screenshots.title}</h2>
                 </FadeUp>
                 <div className="dm-screenshots-layout">
                     <div className="dm-screenshots-text">
                         <FadeUp delay={0.1}>
-                            <h3 className="dm-screenshots-headline">Beautiful neon design,<br />built for connection.</h3>
+                            <h3 className="dm-screenshots-headline">{t.screenshots.headline}</h3>
                         </FadeUp>
                         <FadeUp delay={0.2}>
                             <p className="dm-screenshots-body">
-                                DadoMatch combines a stunning dark neon aesthetic with powerful AI technology.
-                                Every screen is crafted to feel premium and intuitive — because breaking the ice
-                                should feel as good as the conversation that follows.
+                                {t.screenshots.body}
                             </p>
                         </FadeUp>
                         <FadeUp delay={0.3}>
                             <ul className="dm-screenshots-list">
-                                <li>✦ Kotlin Multiplatform (iOS + Android)</li>
-                                <li>✦ Compose Multiplatform UI</li>
-                                <li>✦ Generative AI via Gemini</li>
-                                <li>✦ Firebase Authentication</li>
-                                <li>✦ RevenueCat subscriptions</li>
+                                {t.screenshots.list.map((item, i) => (
+                                    <li key={i}>{item}</li>
+                                ))}
                             </ul>
                         </FadeUp>
                     </div>
-                    <ScreenshotCarousel />
+                    <ScreenshotCarousel language={language} />
                 </div>
             </section>
 
             {/* TECH STACK */}
             <section className="dm-section dm-section-dark">
                 <FadeUp>
-                    <p className="dm-section-eyebrow">Under the hood</p>
-                    <h2 className="dm-section-title">Tech Stack</h2>
+                    <p className="dm-section-eyebrow">{t.tech.eyebrow}</p>
+                    <h2 className="dm-section-title">{t.tech.title}</h2>
                 </FadeUp>
                 <FadeUp delay={0.1} className="dm-tech-grid">
                     {[
@@ -304,27 +396,21 @@ const DadoMatch = () => {
             {/* CTA */}
             <section className="dm-cta-section">
                 <div className="dm-cta-glow" aria-hidden="true" />
-                <FadeUp className="dm-cta-content">
-                    <h2 className="dm-cta-title">Ready to break the ice?</h2>
-                    <p className="dm-cta-sub">Download free. Roll unlimited for 7 days.</p>
-                    <div className="dm-cta-buttons">
-                        <a href="https://play.google.com/store/apps/details?id=com.chauxdevapps.dadomatch" target="_blank" rel="noreferrer" className="dm-btn dm-btn-primary dm-btn-lg">
-                            📱 Get on Google Play
-                        </a>
-                        <a href="https://apps.apple.com/app/dadomatch" target="_blank" rel="noreferrer" className="dm-btn dm-btn-secondary dm-btn-lg">
-                            Download on App Store
-                        </a>
-                    </div>
+                <FadeUp className="dm-cta-content" id="dm-cta">
+                    <h2 className="dm-cta-title">{t.cta.title}</h2>
+                    <p className="dm-cta-sub">{t.cta.sub}</p>
+
+                    <EarlyAccessForm t={t} />
                 </FadeUp>
             </section>
 
             {/* FOOTER */}
             <footer className="dm-footer">
-                <span>© 2025 DadoMatch · ChauxDevApps</span>
+                <span>{t.footer.copyright}</span>
                 <span className="dm-footer-sep">·</span>
                 <a href="https://github.com/felipechaux" target="_blank" rel="noreferrer">GitHub</a>
                 <span className="dm-footer-sep">·</span>
-                <a href="mailto:felipechaux@gmail.com">Contact</a>
+                <a href="mailto:felipechaux@gmail.com">{t.footer.contact}</a>
             </footer>
         </div>
     );

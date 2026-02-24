@@ -78,6 +78,7 @@ import pongx from './projects/pongx.png';
 import montes from './projects/montes.png';
 import galaxySnap from './projects/galaxysnap.png';
 import dadomatch from './projects/dadomatch_feature.png';
+import dadomatchLogo from './projects/dadomatch_logo.jpg';
 
 export {
   nairobi,
@@ -151,5 +152,6 @@ export {
   quicksite,
   kanguro,
   galaxySnap,
-  dadomatch
+  dadomatch,
+  dadomatchLogo
 };

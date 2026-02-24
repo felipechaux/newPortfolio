@@ -34,7 +34,8 @@ import {
   kanguro,
   space,
   galaxySnap,
-  dadomatch
+  dadomatch,
+  dadomatchLogo
 } from '../assets';
 
 export const navLinks = [
@@ -187,7 +188,7 @@ const projects = [
         color: 'pink-text-gradient',
       },
     ],
-    image: dadomatch,
+    image: dadomatchLogo,
     demo: '/dadomatch',
     repo: ''
   },
