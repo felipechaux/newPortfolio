@@ -186,8 +186,20 @@ const StepCard = ({ num, title, desc, delay }) => (
 /* ─── Main Page ──────────────────────────────────────────────── */
 const DadoMatch = () => {
     const [isMuted, setIsMuted] = useState(true);
+    const [isExpanded, setIsExpanded] = useState(false);
     const [language, setLanguage] = useState('en');
     const { scrollY } = useScroll();
+
+    useEffect(() => {
+        if (isExpanded) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'auto';
+        }
+        return () => {
+            document.body.style.overflow = 'auto';
+        };
+    }, [isExpanded]);
 
     const t = translations[language];
 
@@ -271,21 +283,41 @@ const DadoMatch = () => {
             </section>
 
             {/* GLOBAL PERSISTENT VIDEO */}
-            <div className="dm-video-wrapper-fixed">
-                <div className="dm-hero-visual-wrap">
+            <div className={`dm-video-wrapper-fixed ${isExpanded ? 'dm-expanded-active' : ''}`}>
+                <div
+                    className="dm-hero-visual-wrap"
+                    onClick={() => {
+                        if (isExpanded) {
+                            setIsExpanded(false);
+                            setIsMuted(true);
+                        }
+                    }}
+                >
                     <motion.div
+                        layout
                         style={{
-                            scale,
-                            rotateX,
-                            x,
-                            y,
+                            scale: isExpanded ? 1 : scale,
+                            rotateX: isExpanded ? 0 : rotateX,
+                            x: isExpanded ? 0 : x,
+                            y: isExpanded ? 0 : y,
+                            width: isExpanded ? "90%" : "50%",
+                            maxWidth: isExpanded ? "1200px" : "600px",
                         }}
-                        className="dm-hero-visual"
+                        className={`dm-hero-visual ${isExpanded ? 'dm-visual-expanded' : ''}`}
                     >
                         <motion.div
-                            style={{ borderRadius: radius }}
+                            layout
+                            style={{ borderRadius: isExpanded ? "24px" : radius }}
                             className="dm-video-frame group cursor-pointer"
-                            onClick={() => setIsMuted(!isMuted)}
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                if (!isExpanded) {
+                                    setIsExpanded(true);
+                                    setIsMuted(false);
+                                } else {
+                                    setIsMuted(!isMuted);
+                                }
+                            }}
                         >
                             <video
                                 src={dm_video}
@@ -299,7 +331,10 @@ const DadoMatch = () => {
                             {/* Sound Toggle Overlay */}
                             <button
                                 className="dm-sound-toggle"
-                                onClick={() => setIsMuted(!isMuted)}
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    setIsMuted(!isMuted);
+                                }}
                                 aria-label={isMuted ? "Unmute video" : "Mute video"}
                             >
                                 {isMuted ? (
@@ -308,6 +343,23 @@ const DadoMatch = () => {
                                     <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M7 9v6h4l5 5V4l-5 5H7z" /></svg>
                                 )}
                             </button>
+
+                            {/* Close Button to minimize */}
+                            {isExpanded && (
+                                <button
+                                    className="dm-close-video"
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        setIsExpanded(false);
+                                        setIsMuted(true);
+                                    }}
+                                    aria-label="Minimize video"
+                                >
+                                    <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+                                        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
+                                    </svg>
+                                </button>
+                            )}
                         </motion.div>
                     </motion.div>
                 </div>
