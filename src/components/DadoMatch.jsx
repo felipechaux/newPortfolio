@@ -112,19 +112,35 @@ const EarlyAccessForm = ({ t }) => {
         setLoading(true);
         setStatus(null);
 
-        emailjs
-            .send(
-                'service_r77g6uq',
-                'template_8mtok6j',
-                {
-                    from_name: form.name,
-                    to_name: 'Felipe',
-                    from_email: form.email,
-                    to_email: 'felchax@gmail.com',
-                    message: `EARLY ACCESS REQUEST for DadoMatch Android. User: ${form.name} (${form.email})`,
-                },
-                'q3RoWKQusixcwHgIq'
-            )
+        // 1. Send Internal Notification to Felipe
+        const notificationPromise = emailjs.send(
+            'service_r77g6uq',
+            'template_8mtok6j',
+            {
+                from_name: form.name,
+                to_name: 'Felipe',
+                from_email: form.email,
+                to_email: 'felchax@gmail.com',
+                message: `NEW EARLY ACCESS SIGNUP: ${form.name} (${form.email}) has joined the list for DadoMatch Android.`,
+            },
+            'q3RoWKQusixcwHgIq'
+        );
+
+        // 2. Send Welcome Email to the User (ChauxDevApps)
+        const welcomePromise = emailjs.send(
+            'service_r77g6uq',
+            'template_8mtok6j', // Using the same template but with different content
+            {
+                from_name: 'ChauxDevApps',
+                to_name: form.name,
+                to_email: form.email,
+                from_email: 'felchax@gmail.com',
+                message: `Welcome To DadoMatch! 🎲\n\nWe're excited to have you as an early tester. You can now access the internal testing version on Android using the link below:\n\nJoin Testing: https://play.google.com/apps/internaltest/4701365888507470379\n\nThank you for being part of our journey!\n\nBest,\nThe ChauxDevApps Team`,
+            },
+            'q3RoWKQusixcwHgIq'
+        );
+
+        Promise.all([notificationPromise, welcomePromise])
             .then(() => {
                 setLoading(false);
                 setStatus('success');
