@@ -214,7 +214,6 @@ const DadoMatch = () => {
     // MonAI-style scroll transforms + PiP transition
     const scale = useTransform(scrollY, [0, 600], [1, 0.45]);
     const rotateX = useTransform(scrollY, [0, 600], [0, 8]);
-    const heroContentOpacity = useTransform(scrollY, [0, 300], [1, 0]);
 
     // PiP (Picture-in-Picture) transforms
     const x = useTransform(scrollY, [0, 600], ["0%", "36%"]);
@@ -261,7 +260,7 @@ const DadoMatch = () => {
             <section className="dm-hero">
                 <div className="dm-hero-stars" aria-hidden="true" />
 
-                <motion.div style={{ opacity: heroContentOpacity }} className="dm-hero-content">
+                <motion.div className="dm-hero-content">
                     <FadeUp delay={0}>
                         <div className="dm-badge">{t.hero.badge}</div>
                     </FadeUp>
