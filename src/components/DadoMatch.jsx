@@ -140,7 +140,12 @@ const EarlyAccessForm = ({ t }) => {
     return (
         <div className="dm-ea-form-wrap">
             <div className="mb-4 text-left">
-                <h3 className="text-lg font-bold text-white mb-1">{t.cta.form.title}</h3>
+                <div className="flex items-center gap-2 mb-1">
+                    <h3 className="text-lg font-bold text-white">{t.cta.form.title}</h3>
+                    <span className="text-[10px] bg-green-500/20 text-green-400 px-2 py-0.5 rounded-full border border-green-500/30 font-bold uppercase tracking-wider">
+                        Android
+                    </span>
+                </div>
                 <p className="text-sm text-white/50">{t.cta.form.subtitle}</p>
             </div>
             <form onSubmit={handleSubmit} className="dm-ea-form">

@@ -63,7 +63,7 @@ export const translations = {
             apple: "Download on App Store",
             form: {
                 title: "Get early access",
-                subtitle: "The app is currently in internal testing. Join the list to get access.",
+                subtitle: "The app is currently in internal testing. Join the list to get access. (Android only for now)",
                 placeholderName: "Your Name",
                 placeholderEmail: "Your Email",
                 submit: "Join List",
@@ -138,7 +138,7 @@ export const translations = {
             apple: "App Store",
             form: {
                 title: "Obtén acceso anticipado",
-                subtitle: "La app está en fase de pruebas internas. Únete a la lista para obtener acceso.",
+                subtitle: "La app está en fase de pruebas internas. Únete a la lista para obtener acceso. (Disponible solo para Android por ahora)",
                 placeholderName: "Tu Nombre",
                 placeholderEmail: "Tu Correo",
                 submit: "Unirse",
