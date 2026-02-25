@@ -129,11 +129,14 @@ const EarlyAccessForm = ({ t }) => {
         // 2. Send Welcome Email to the User (ChauxDevApps)
         const welcomePromise = emailjs.send(
             'service_r77g6uq',
-            'template_ij2yy2f', // New premium HTML template
+            'template_ij2yy2f',
             {
                 to_name: form.name,
+                name: form.name,
                 to_email: form.email,
+                user_email: form.email,
                 from_name: 'ChauxDevApps',
+                message: 'Welcome to DadoMatch!',
             },
             'q3RoWKQusixcwHgIq'
         );
