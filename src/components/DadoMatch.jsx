@@ -187,6 +187,7 @@ const StepCard = ({ num, title, desc, delay }) => (
 const DadoMatch = () => {
     const [isMuted, setIsMuted] = useState(true);
     const [isExpanded, setIsExpanded] = useState(false);
+    const videoRef = useRef(null);
     const [language, setLanguage] = useState('en');
     const { scrollY } = useScroll();
 
@@ -200,6 +201,13 @@ const DadoMatch = () => {
             document.body.style.overflow = 'auto';
         };
     }, [isExpanded]);
+
+    // Sync muted state directly to video element to avoid React render lag during loop
+    useEffect(() => {
+        if (videoRef.current) {
+            videoRef.current.muted = isMuted;
+        }
+    }, [isMuted]);
 
     const t = translations[language];
 
@@ -320,6 +328,7 @@ const DadoMatch = () => {
                             }}
                         >
                             <video
+                                ref={videoRef}
                                 src={dm_video}
                                 autoPlay
                                 loop
@@ -327,6 +336,11 @@ const DadoMatch = () => {
                                 playsInline
                                 className="dm-hero-video"
                                 poster={dm_feature}
+                                onEnded={(e) => {
+                                    // Fallback for seamless loop in some browsers
+                                    e.target.currentTime = 0;
+                                    e.target.play().catch(err => console.log("Loop playback interrupted"));
+                                }}
                             />
                             {/* Sound Toggle Overlay */}
                             <button
