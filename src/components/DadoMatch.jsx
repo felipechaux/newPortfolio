@@ -129,13 +129,11 @@ const EarlyAccessForm = ({ t }) => {
         // 2. Send Welcome Email to the User (ChauxDevApps)
         const welcomePromise = emailjs.send(
             'service_r77g6uq',
-            'template_8mtok6j', // Using the same template but with different content
+            'template_ij2yy2f', // New premium HTML template
             {
-                from_name: 'ChauxDevApps',
                 to_name: form.name,
                 to_email: form.email,
-                from_email: 'felchax@gmail.com',
-                message: `Welcome To DadoMatch! 🎲\n\nWe're excited to have you as an early tester. You can now access the internal testing version on Android using the link below:\n\nJoin Testing: https://play.google.com/apps/internaltest/4701365888507470379\n\nThank you for being part of our journey!\n\nBest,\nThe ChauxDevApps Team`,
+                from_name: 'ChauxDevApps',
             },
             'q3RoWKQusixcwHgIq'
         );
