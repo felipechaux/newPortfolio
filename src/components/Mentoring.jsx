@@ -461,6 +461,7 @@ const Mentoring = () => {
             style={{ width: 38, height: 38, objectFit: 'contain', filter: 'brightness(0) invert(1)' }}
           />
           <span
+            className="hidden sm:inline"
             style={{
               color: '#d4d4d8', fontFamily: 'Mova, sans-serif',
               fontSize: '16px', letterSpacing: '3px',
