@@ -108,11 +108,6 @@ const t = {
         flutter: 'Collaborated on a Flutter project',
       },
     },
-    ai: {
-      eyebrow: 'AI tools · part of the curriculum',
-      title: "I'll teach you how to use AI the right way.",
-      quote: "Most juniors use AI as a crutch — they paste the output and move on without understanding it. That's how you stay stuck. I'm genuinely excited about what AI tools can do, and I'll teach you how to actually leverage them: to move faster, debug smarter, and write better code — without losing the fundamentals that make you a real developer. AI makes a good developer better. We'll work on becoming that good developer first.",
-    },
     cta: {
       title: 'Ready to stop watching tutorials\nand start building real apps?',
       subtitle: "The intro call is 100% free. 15 minutes. We talk about where you are, where you want to go, and whether we're a good fit.",
@@ -223,11 +218,6 @@ const t = {
         managed: 'Fue manager directo de Felipe',
         flutter: 'Colaboraron en un proyecto Flutter',
       },
-    },
-    ai: {
-      eyebrow: 'Herramientas de IA · parte del programa',
-      title: 'Te enseño a usar la IA de la forma correcta.',
-      quote: 'La mayoría de los juniors usan la IA como muleta — pegan el output y siguen sin entender nada. Así es como te quedas estancado. Me entusiasma genuinamente lo que las herramientas de IA pueden hacer, y te enseñaré a aprovecharlas de verdad: para moverte más rápido, depurar con más inteligencia y escribir mejor código — sin perder los fundamentos que te hacen un desarrollador real. La IA hace mejor a un buen desarrollador. Primero trabajaremos en convertirnos en ese buen desarrollador.',
     },
     cta: {
       title: '¿Listo para dejar de ver tutoriales\ny empezar a construir apps reales?',
@@ -749,49 +739,6 @@ const Mentoring = () => {
               <CredentialCard key={i} {...c} delay={i * 0.1} />
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* ── AI PHILOSOPHY ───────────────────────────────── */}
-      <section style={{ padding: '64px 0', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
-        <div className={`${styles.paddingX} max-w-5xl mx-auto`}>
-          <FadeUp>
-            <div
-              style={{
-                background: 'linear-gradient(135deg, rgba(124,58,237,0.1) 0%, rgba(99,102,241,0.06) 50%, rgba(96,165,250,0.06) 100%)',
-                border: '1px solid rgba(124,58,237,0.25)',
-                borderRadius: '20px',
-                padding: '40px 48px',
-                position: 'relative',
-                overflow: 'hidden',
-              }}
-            >
-              <div
-                style={{
-                  position: 'absolute', top: '-40px', right: '-40px',
-                  fontSize: '160px', opacity: 0.06, lineHeight: 1,
-                  pointerEvents: 'none', userSelect: 'none',
-                }}
-              >
-                🤖
-              </div>
-              <p className="text-taupe uppercase tracking-widest text-[12px] font-semibold font-poppins mb-3">
-                {tr.ai.eyebrow}
-              </p>
-              <h3
-                className="text-timberWolf font-poppins font-black mb-4"
-                style={{ fontSize: 'clamp(20px, 2.5vw, 28px)', position: 'relative', zIndex: 1 }}
-              >
-                {tr.ai.title}
-              </h3>
-              <p
-                className="text-taupe font-poppins leading-relaxed"
-                style={{ fontSize: 'clamp(15px, 1.6vw, 17px)', maxWidth: '740px', position: 'relative', zIndex: 1 }}
-              >
-                {tr.ai.quote}
-              </p>
-            </div>
-          </FadeUp>
         </div>
       </section>
 
