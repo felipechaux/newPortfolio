@@ -5,6 +5,7 @@ import whiteabstract from './backgrounds/white-abstract.png';
 import logo from './logo/logo-black.png';
 import logotext from './logo/logo-text-black.png';
 import feli from './personal/feli.png';
+import felipe from './personal/felipe.png';
 import astronaut from './logo/helmet.png';
 
 import backend from './icons/backend.png';
@@ -86,6 +87,7 @@ export {
   logo,
   logotext,
   feli,
+  felipe,
   backend,
   ux,
   frontend,

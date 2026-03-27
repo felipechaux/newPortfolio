@@ -8,6 +8,8 @@ import { projects } from '../constants';
 import { projectsTwo } from '../constants';
 import { projectGames } from '../constants';
 import { fadeIn, textVariant, staggerContainer } from '../utils/motion';
+import { useLang } from '../context/LanguageContext';
+import { pt } from '../constants/portfolioTranslations';
 
 const ProjectCard = ({
   id,
@@ -164,30 +166,28 @@ const ProjectCard = ({
 
 const Projects = () => {
   const [active, setActive] = useState('project-2');
+  const { lang } = useLang();
+  const tr = pt[lang].projects;
 
   return (
     <div className="-mt-[6rem]">
       <motion.div variants={textVariant()}>
-        <p className={`${styles.sectionSubText} `}>Case Studies</p>
-        <h2 className={`${styles.sectionHeadTextLight}`}>Projects.</h2>
+        <p className={`${styles.sectionSubText} `}>{tr.sub}</p>
+        <h2 className={`${styles.sectionHeadTextLight}`}>{tr.title}</h2>
       </motion.div>
 
       <div className="w-full flex">
         <motion.p
           variants={fadeIn('', '', 0.1, 1)}
           className="mt-4 text-taupe text-[18px] max-w-3xl leading-[30px]">
-          These projects serve as compelling demonstrations of my expertise,
-          showcasing practical examples of my work. Each project
-          includes brief descriptions and some of them provides links to code repositories
-          and live demos. These showcases effectively highlight my ability
-          to tackle intricate challenges and adapt to various technologies.
+          {tr.desc}
         </motion.p>
       </div>
 
       <br></br>
       <br></br>
       <motion.div variants={textVariant()}>
-        <h3 className={`${styles.sectionHeadTextLight}`}>Apps</h3>
+        <h3 className={`${styles.sectionHeadTextLight}`}>{tr.apps}</h3>
       </motion.div>
 
       <motion.div
@@ -230,7 +230,7 @@ const Projects = () => {
         </div>
       </motion.div>
       <motion.div variants={textVariant()}>
-        <h3 className={`${styles.sectionHeadTextLight}`}>Some Games</h3>
+        <h3 className={`${styles.sectionHeadTextLight}`}>{tr.games}</h3>
       </motion.div>
       <motion.div
         variants={staggerContainer}

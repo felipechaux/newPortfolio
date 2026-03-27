@@ -5,6 +5,8 @@ import { styles } from '../styles';
 import { SectionWrapper } from '../hoc';
 import { slideIn } from '../utils/motion';
 import { send, sendHover } from '../assets';
+import { useLang } from '../context/LanguageContext';
+import { pt } from '../constants/portfolioTranslations';
 
 const Contact = () => {
   const formRef = useRef();
@@ -14,6 +16,8 @@ const Contact = () => {
     message: '',
   });
   const [loading, setLoading] = useState(false);
+  const { lang } = useLang();
+  const tr = pt[lang].contact;
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -43,7 +47,7 @@ const Contact = () => {
       .then(
         () => {
           setLoading(false);
-          alert('Thank you. I will get back to you as soon as possible.');
+          alert(tr.successMsg);
 
           setForm({
             name: '',
@@ -54,7 +58,7 @@ const Contact = () => {
         (error) => {
           setLoading(false);
           console.log(error);
-          alert('Something went wrong. Please try again.');
+          alert(tr.errorMsg);
         }
       );
   };
@@ -66,22 +70,22 @@ const Contact = () => {
       <motion.div
         variants={slideIn('left', 'tween', 0.2, 1)}
         className="flex-[0.75] bg-jet p-8 rounded-2xl">
-        <p className={styles.sectionSubText}>Get in touch</p>
-        <h3 className={styles.sectionHeadTextLight}>Contact.</h3>
+        <p className={styles.sectionSubText}>{tr.sub}</p>
+        <h3 className={styles.sectionHeadTextLight}>{tr.title}</h3>
 
         <form
           ref={formRef}
           onSubmit={handleSubmit}
           className="mt-10 flex flex-col gap-6 font-poppins">
           <label className="flex flex-col">
-            <span className="text-timberWolf font-medium mb-4">Your Name</span>
+            <span className="text-timberWolf font-medium mb-4">{tr.nameLabel}</span>
             <input
               required
               type="text"
               name="name"
               value={form.name}
               onChange={handleChange}
-              placeholder="What's your name?"
+              placeholder={tr.namePlaceholder}
               className="bg-eerieBlack py-4 px-6
               placeholder:text-taupe
               text-timberWolf rounded-lg outline-none
@@ -89,14 +93,14 @@ const Contact = () => {
             />
           </label>
           <label className="flex flex-col">
-            <span className="text-timberWolf font-medium mb-4">Your Email</span>
+            <span className="text-timberWolf font-medium mb-4">{tr.emailLabel}</span>
             <input
               required
               type="email"
               name="email"
               value={form.email}
               onChange={handleChange}
-              placeholder="What's your email?"
+              placeholder={tr.emailPlaceholder}
               className="bg-eerieBlack py-4 px-6
               placeholder:text-taupe
               text-timberWolf rounded-lg outline-none
@@ -105,7 +109,7 @@ const Contact = () => {
           </label>
           <label className="flex flex-col">
             <span className="text-timberWolf font-medium mb-4">
-              Your Message
+              {tr.messageLabel}
             </span>
             <textarea
               required
@@ -113,7 +117,7 @@ const Contact = () => {
               name="message"
               value={form.message}
               onChange={handleChange}
-              placeholder="What's your message?"
+              placeholder={tr.messagePlaceholder}
               className="bg-eerieBlack py-4 px-6
               placeholder:text-taupe
               text-timberWolf rounded-lg outline-none
@@ -123,12 +127,12 @@ const Contact = () => {
 
           <button
             type="submit"
-            className="live-demo flex justify-center sm:gap-4 
-            gap-3 sm:text-[20px] text-[16px] text-timberWolf 
+            className="live-demo flex justify-center sm:gap-4
+            gap-3 sm:text-[20px] text-[16px] text-timberWolf
             font-bold font-beckman items-center py-5
-            whitespace-nowrap sm:w-[130px] sm:h-[50px] 
-            w-[100px] h-[45px] rounded-[10px] bg-night 
-            hover:bg-battleGray hover:text-eerieBlack 
+            whitespace-nowrap sm:w-[130px] sm:h-[50px]
+            w-[100px] h-[45px] rounded-[10px] bg-night
+            hover:bg-battleGray hover:text-eerieBlack
             transition duration-[0.2s] ease-in-out"
             onMouseOver={() => {
               document
@@ -138,7 +142,7 @@ const Contact = () => {
             onMouseOut={() => {
               document.querySelector('.contact-btn').setAttribute('src', send);
             }}>
-            {loading ? 'Sending' : 'Send'}
+            {loading ? tr.sending : tr.send}
             <img
               src={send}
               alt="send"
