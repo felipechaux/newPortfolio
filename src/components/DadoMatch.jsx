@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react';
-import emailjs from '@emailjs/browser';
 import { motion, useAnimation, useInView, useScroll, useTransform } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import dm_screen1 from '../assets/projects/dadomatch_screen1.png';
@@ -101,98 +100,25 @@ const ScreenshotCarousel = ({ language }) => {
     );
 };
 
-/* ─── Early Access Form ───────────────────────────── */
-const EarlyAccessForm = ({ t }) => {
-    const [form, setForm] = useState({ name: '', email: '' });
-    const [loading, setLoading] = useState(false);
-    const [status, setStatus] = useState(null); // 'success' | 'error'
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        setLoading(true);
-        setStatus(null);
-
-        // 1. Send Internal Notification to Felipe
-        const notificationPromise = emailjs.send(
-            'service_r77g6uq',
-            'template_8mtok6j',
-            {
-                from_name: form.name,
-                to_name: 'Felipe',
-                from_email: form.email,
-                to_email: 'felchax@gmail.com',
-                message: `NEW EARLY ACCESS SIGNUP: ${form.name} (${form.email}) has joined the list for DadoMatch Android.`,
-            },
-            'q3RoWKQusixcwHgIq'
-        );
-
-        // 2. Send Welcome Email to the User (ChauxDevApps)
-        const welcomePromise = emailjs.send(
-            'service_r77g6uq',
-            'template_ij2yy2f',
-            {
-                to_name: form.name,
-                name: form.name,
-                to_email: form.email,
-                user_email: form.email,
-                from_name: 'ChauxDevApps',
-                message: 'Welcome to DadoMatch!',
-            },
-            'q3RoWKQusixcwHgIq'
-        );
-
-        Promise.all([notificationPromise, welcomePromise])
-            .then(() => {
-                setLoading(false);
-                setStatus('success');
-                setForm({ name: '', email: '' });
-            })
-            .catch((error) => {
-                setLoading(false);
-                setStatus('error');
-                console.error(error);
-            });
-    };
-
-    return (
-        <div className="dm-ea-form-wrap">
-            <div className="mb-4 text-left">
-                <div className="flex items-center gap-2 mb-1">
-                    <h3 className="text-lg font-bold text-white">{t.cta.form.title}</h3>
-                    <span className="text-[10px] bg-green-500/20 text-green-400 px-2 py-0.5 rounded-full border border-green-500/30 font-bold uppercase tracking-wider">
-                        Android
-                    </span>
-                </div>
-                <p className="text-sm text-white/50">{t.cta.form.subtitle}</p>
-            </div>
-            <form onSubmit={handleSubmit} className="dm-ea-form">
-                <div className="dm-ea-inputs">
-                    <input
-                        required
-                        type="text"
-                        placeholder={t.cta.form.placeholderName}
-                        value={form.name}
-                        onChange={(e) => setForm({ ...form, name: e.target.value })}
-                        className="dm-ea-input"
-                    />
-                    <input
-                        required
-                        type="email"
-                        placeholder={t.cta.form.placeholderEmail}
-                        value={form.email}
-                        onChange={(e) => setForm({ ...form, email: e.target.value })}
-                        className="dm-ea-input"
-                    />
-                </div>
-                <button type="submit" disabled={loading} className="dm-ea-submit">
-                    {loading ? t.cta.form.submitting : t.cta.form.submit}
-                </button>
-            </form>
-            {status === 'success' && <p className="dm-ea-message success">{t.cta.form.success}</p>}
-            {status === 'error' && <p className="dm-ea-message error">{t.cta.form.error}</p>}
-        </div>
-    );
-};
+/* ─── Google Play Button ─────────────────────────────── */
+const GooglePlayButton = ({ t }) => (
+    <a
+        href="https://play.google.com/store/apps/details?id=com.chauxdevapps.dadomatch"
+        target="_blank"
+        rel="noreferrer"
+        className="dm-gp-btn"
+        aria-label="Get DadoMatch on Google Play"
+    >
+        <span className="dm-gp-shine" aria-hidden="true" />
+        <svg className="dm-gp-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M3.18 23.76c.34.19.72.24 1.1.14l11.4-11.4-2.38-2.38-10.12 13.64zM20.12 10.4l-2.8-1.6-2.66 2.66 2.66 2.66 2.82-1.6c.8-.46.8-1.66-.02-2.12zM2.18.76C1.94 1.02 1.8 1.4 1.8 1.9v20.2c0 .5.14.88.4 1.12l.06.06L13.52 12v-.26L2.24.7l-.06.06z" fill="#fff"/>
+        </svg>
+        <span className="dm-gp-text">
+            <span className="dm-gp-label">{t.cta.googleLabel}</span>
+            <span className="dm-gp-store">Google Play</span>
+        </span>
+    </a>
+);
 
 /* ─── Step card (How It Works) ───────────────────────────────── */
 const StepCard = ({ num, title, desc, delay }) => (
@@ -274,7 +200,7 @@ const DadoMatch = () => {
                         </button>
                     </div>
 
-                    <a href="#dm-cta" className="dm-nav-cta">{t.nav.download}</a>
+                    <a href="https://play.google.com/store/apps/details?id=com.chauxdevapps.dadomatch" target="_blank" rel="noreferrer" className="dm-nav-cta">{t.nav.download}</a>
                 </div>
             </nav>
 
@@ -303,7 +229,7 @@ const DadoMatch = () => {
                         ))}
                     </FadeUp>
                     <FadeUp delay={0.4}>
-                        <EarlyAccessForm t={t} />
+                        <GooglePlayButton t={t} />
                     </FadeUp>
                 </motion.div>
 
@@ -487,7 +413,7 @@ const DadoMatch = () => {
                     <h2 className="dm-cta-title">{t.cta.title}</h2>
                     <p className="dm-cta-sub">{t.cta.sub}</p>
 
-                    <EarlyAccessForm t={t} />
+                    <GooglePlayButton t={t} />
                 </FadeUp>
             </section>
 

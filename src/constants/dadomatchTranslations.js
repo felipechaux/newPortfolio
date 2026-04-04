@@ -6,14 +6,14 @@ export const translations = {
             title1: "Less scroll,",
             title2: "more action.",
             subtitle: "Pick your environment, choose your intensity, and let AI generate the perfect icebreaker. Roll the dice — spark the conversation.",
-            pills: ["🎉 Party", "❤️ Romantic", "🌶️ Spicy", "☕ Café"]
+            pills: ["🎉 Party", "🏖️ Beach", "💼 Work", "💻 Online", "🎵 Concert", "🌶️ Spicy", "😂 Funny", "❤️ Romantic"]
         },
         how: {
             eyebrow: "Simple by design",
             title: "How It Works",
             steps: [
-                { num: "01", title: "Pick an Environment", desc: "Gym, Party, Library, Café, Bar — choose the social context that fits." },
-                { num: "02", title: "Set the Intensity", desc: "Cringe, Romantic, Direct, Spicy — dial up or down the energy of your icebreaker." },
+                { num: "01", title: "Pick an Environment", desc: "Gym, Party, Bar, Café, Beach, Work, Online, Concert, Library — 9 social contexts and counting." },
+                { num: "02", title: "Set the Intensity", desc: "Cringe, Romantic, Direct, Funny, Spicy — 5 vibes to match the energy of the moment." },
                 { num: "03", title: "Roll the Dice", desc: "Tap LAUNCH. Generative AI crafts a perfect, context-aware opener instantly." },
                 { num: "04", title: "Track your Rizz", desc: "Rate each icebreaker 🔥 Top or 💀 Cringe and watch your social score grow." }
             ]
@@ -24,8 +24,8 @@ export const translations = {
             list: [
                 { icon: "🤖", title: "AI-Powered Icebreakers", desc: "Generative AI reads the room — every opener is unique and tailored to your chosen environment and intensity." },
                 { icon: "🎲", title: "Roll the Dice", desc: "One tap. Instant magic. No awkward silence, no generic pickup lines — just perfectly timed conversation starters." },
-                { icon: "🌍", title: "Any Environment", desc: "Gym, party, café, library, bar — the app adapts its style to wherever you are in the world." },
-                { icon: "🌶️", title: "Adjustable Intensity", desc: "Keep it light and funny or turn up the heat. You're always in control of the vibe." },
+                { icon: "🌍", title: "9 Environments", desc: "Gym, Party, Bar, Café, Beach, Work, Online, Concert, Library — the app adapts its style to wherever you are." },
+                { icon: "🌶️", title: "5 Intensities", desc: "Cringe, Romantic, Direct, Funny, Spicy — dial up or down to match exactly the vibe you're going for." },
                 { icon: "⭐", title: "Favorites", desc: "Save the lines that worked. Build your own personal collection of top openers." },
                 { icon: "📈", title: "Progress Tracking", desc: "See your social wins. Track which icebreakers landed and improve your Rizz over time." },
                 { icon: "🔐", title: "Google & Apple Sign-In", desc: "Secure, easy login. Your favorites and history follow you across iOS and Android." },
@@ -58,19 +58,10 @@ export const translations = {
         },
         cta: {
             title: "Ready to break the ice?",
-            sub: "Download free. Roll unlimited for 7 days.",
+            sub: "Free to download. Available now on Android.",
             google: "📱 Get on Google Play",
+            googleLabel: "Get it on",
             apple: "Download on App Store",
-            form: {
-                title: "Get early access",
-                subtitle: "The app is currently in internal testing. Join the list to get access. (Android only for now)",
-                placeholderName: "Your Name",
-                placeholderEmail: "Your Email",
-                submit: "Join List",
-                submitting: "Joining...",
-                success: "Thank you! Check your email soon for access instructions.",
-                error: "Something went wrong. Please try again."
-            }
         },
         footer: { copyright: "© 2025 DadoMatch · ChauxDevApps", contact: "Contact", privacy: "Privacy Policy" }
     },
@@ -81,14 +72,14 @@ export const translations = {
             title1: "Menos scroll,",
             title2: "más acción.",
             subtitle: "Elige tu entorno, ajusta la intensidad y deja que la IA genere el rompehielos perfecto. Lanza los dados y rompe el hielo.",
-            pills: ["🎉 Fiesta", "❤️ Romántico", "🌶️ Picante", "☕ Café"]
+            pills: ["🎉 Fiesta", "🏖️ Playa", "💼 Trabajo", "💻 Online", "🎵 Concierto", "🌶️ Picante", "😂 Gracioso", "❤️ Romántico"]
         },
         how: {
             eyebrow: "Diseño simple",
             title: "Cómo funciona",
             steps: [
-                { num: "01", title: "Elige un entorno", desc: "Gimnasio, Fiesta, Biblioteca, Café, Bar — elige el contexto social que mejor encaje." },
-                { num: "02", title: "Ajusta la intensidad", desc: "Cringe, Romántico, Directo, Picante — sube o baja la energía de tu rompehielos." },
+                { num: "01", title: "Elige un entorno", desc: "Gimnasio, Fiesta, Bar, Café, Playa, Trabajo, Online, Concierto, Biblioteca — 9 contextos sociales y más por venir." },
+                { num: "02", title: "Ajusta la intensidad", desc: "Cringe, Romántico, Directo, Gracioso, Picante — 5 vibes para cada momento." },
                 { num: "03", title: "Lanza los dados", desc: "Pulsa LAUNCH. IA generativa crea un abridor perfecto y contextual al instante." },
                 { num: "04", title: "Mide tu Rizz", desc: "Califica cada frase 🔥 Top o 💀 Cringe y mira cómo crece tu puntuación social." }
             ]
@@ -99,8 +90,8 @@ export const translations = {
             list: [
                 { icon: "🤖", title: "IA Generativa", desc: "La IA lee el ambiente — cada frase es única y personalizada según tu entorno e intensidad." },
                 { icon: "🎲", title: "Lanza los dados", desc: "Un toque. Magia instantánea. Sin silencios incómodos ni frases genéricas." },
-                { icon: "🌍", title: "Cualquier Entorno", desc: "Gimnasio, fiesta, café, biblioteca, bar — la app adapta su estilo a cualquier lugar." },
-                { icon: "🌶️", title: "Intensidad Ajustable", desc: "Manténlo ligero y divertido o sube la temperatura. Tú controlas el ambiente." },
+                { icon: "🌍", title: "9 Entornos", desc: "Gimnasio, Fiesta, Bar, Café, Playa, Trabajo, Online, Concierto, Biblioteca — la app adapta su estilo a cada lugar." },
+                { icon: "🌶️", title: "5 Intensidades", desc: "Cringe, Romántico, Directo, Gracioso, Picante — tú eliges exactamente el ambiente que quieres crear." },
                 { icon: "⭐", title: "Favoritos", desc: "Guarda las frases que mejor funcionen. Crea tu propia colección personal." },
                 { icon: "📈", title: "Seguimiento", desc: "Mira tus victorias sociales. Analiza qué frases funcionaron mejor." },
                 { icon: "🔐", title: "Google & Apple Sign-In", desc: "Registro seguro y fácil. Tus favoritos e historial te siguen en iOS y Android." },
@@ -133,19 +124,10 @@ export const translations = {
         },
         cta: {
             title: "¿Listo para romper el hielo?",
-            sub: "Descarga gratis. Tiradas ilimitadas por 7 días.",
+            sub: "Descarga gratis. Disponible ahora en Android.",
             google: "📱 Google Play",
+            googleLabel: "Disponible en",
             apple: "App Store",
-            form: {
-                title: "Obtén acceso anticipado",
-                subtitle: "La app está en fase de pruebas internas. Únete a la lista para obtener acceso. (Disponible solo para Android por ahora)",
-                placeholderName: "Tu Nombre",
-                placeholderEmail: "Tu Correo",
-                submit: "Unirse",
-                submitting: "Enviando...",
-                success: "¡Gracias! Revisa tu correo pronto para las instrucciones.",
-                error: "Algo salió mal. Por favor, inténtalo de nuevo."
-            }
         },
         footer: { copyright: "© 2025 DadoMatch · ChauxDevApps", contact: "Contacto", privacy: "Privacidad" }
     }
