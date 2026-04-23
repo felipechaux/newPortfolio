@@ -1,4 +1,11 @@
 {
+  "redirects": [
+    {
+      "source": "/dadomatch",
+      "destination": "https://play.google.com/store/apps/details?id=com.chauxdevapps.dadomatch",
+      "permanent": false
+    }
+  ],
   "rewrites": [
     { "source": "/(.*)", "destination": "/index.html" }
   ]
