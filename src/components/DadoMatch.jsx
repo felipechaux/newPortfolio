@@ -1,11 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { motion, useAnimation, useInView, useScroll, useTransform } from 'framer-motion';
+import { motion, useAnimation, useInView, useReducedMotion, useScroll, useTransform } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import dm_screen1 from '../assets/projects/dadomatch_screen1.png';
-import dm_screen2 from '../assets/projects/dadomatch_screen2.png';
-import dm_screen3 from '../assets/projects/dadomatch_screen3.png';
-import dm_screen4 from '../assets/projects/dadomatch_screen4.png';
-import dm_screen5 from '../assets/projects/dadomatch_screen5.png';
+import dm_shot_iphone from '../assets/dadomatch-screenshots/iphone-16.png';
+import dm_shot_ipad from '../assets/dadomatch-screenshots/ipad-13.png';
 import dm_feature from '../assets/projects/dadomatch_feature.png';
 import dm_video from '../assets/projects/dadomatch_hero.mp4';
 import dm_logo from '../assets/projects/dadomatch_logo.jpg';
@@ -46,79 +43,162 @@ const FeatureCard = ({ icon, title, description, delay }) => (
     </FadeUp>
 );
 
-/* ─── Screenshot Carousel ────────────────────────────────────── */
-const screenshots = [dm_screen1, dm_screen2, dm_screen3, dm_screen4, dm_screen5];
-const screenshotCaptions = [
-    'Welcome to DadoMatch',
-    'Choose your environment & intensity',
-    'Instant AI icebreaker',
-    'Feedback that improves your Rizz',
-    'Track your social progress',
+/* ─── Device screenshots ─────────────────────────────────────── */
+// Grid columns are sized by each image's aspect ratio (1320×2868 and
+// 2064×2752) so both screenshots render at the same height side by side.
+const deviceScreenshots = [
+    { src: dm_shot_iphone, label: 'iPhone 16', alt: 'DadoMatch on iPhone 16', width: 1320, height: 2868 },
+    { src: dm_shot_ipad, label: 'iPad 13', alt: 'DadoMatch on iPad 13', width: 2064, height: 2752 },
 ];
 
-const ScreenshotCarousel = ({ language }) => {
-    const [active, setActive] = useState(0);
-    const captions = translations[language].screenshots.captions;
-
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setActive((prev) => (prev + 1) % 5);
-        }, 4000);
-        return () => clearInterval(interval);
-    }, []);
-
-    return (
-        <div className="dm-carousel-wrap">
-            <div className="dm-carousel-images">
-                {[dm_screen1, dm_screen2, dm_screen3, dm_screen4, dm_screen5].map((img, i) => (
-                    <motion.div
-                        key={i}
-                        className="dm-carousel-item"
-                        initial={{ opacity: 0, x: 20 }}
-                        animate={{
-                            opacity: active === i ? 1 : 0,
-                            x: active === i ? 0 : 20,
-                            scale: active === i ? 1 : 0.95
-                        }}
-                        transition={{ duration: 0.6, ease: "easeOut" }}
-                    >
-                        <img src={img} alt={`Screen ${i + 1}`} className="dm-carousel-img" />
-                    </motion.div>
-                ))}
-            </div>
-            <div className="dm-carousel-dots">
-                {[0, 1, 2, 3, 4].map((i) => (
-                    <button
-                        key={i}
-                        className={`dm-dot ${active === i ? 'dm-dot-active' : ''}`}
-                        onClick={() => setActive(i)}
+const DeviceScreenshots = () => (
+    <FadeUp delay={0.2} className="dm-devices-grid">
+        {deviceScreenshots.map((shot) => (
+            <figure key={shot.label} className="dm-device">
+                <div className="dm-device-frame">
+                    <img
+                        src={shot.src}
+                        alt={shot.alt}
+                        width={shot.width}
+                        height={shot.height}
+                        loading="lazy"
+                        className="dm-device-img"
                     />
-                ))}
-            </div>
-            <p className="dm-carousel-caption">{captions[active]}</p>
-        </div>
+                </div>
+                <figcaption className="dm-device-label">{shot.label}</figcaption>
+            </figure>
+        ))}
+    </FadeUp>
+);
+
+/* ─── Store links + platform detection ───────────────────────── */
+const STORE_LINKS = {
+    ios: 'https://apps.apple.com/app/dadomatch/id6761394328',
+    android: 'https://play.google.com/store/apps/details?id=com.chauxdevapps.dadomatch',
+};
+
+const detectPlatform = () => {
+    if (typeof navigator === 'undefined') return 'desktop';
+    const ua = navigator.userAgent || '';
+    if (/android/i.test(ua)) return 'android';
+    // iPadOS 13+ reports itself as "Macintosh" — touch support gives it away
+    if (/iphone|ipad|ipod/i.test(ua) || (/macintosh/i.test(ua) && navigator.maxTouchPoints > 1)) return 'ios';
+    return 'desktop';
+};
+
+const BOT_UA = /bot|crawler|spider|crawling|lighthouse|preview/i;
+
+// Mobile visitors go straight to their store. Crawlers and "?web" keep the landing page.
+const getRedirectTarget = () => {
+    if (typeof window === 'undefined') return null;
+    if (new URLSearchParams(window.location.search).has('web')) return null;
+    if (BOT_UA.test(navigator.userAgent || '')) return null;
+    const platform = detectPlatform();
+    return platform === 'desktop' ? null : platform;
+};
+
+const usePlatform = () => {
+    // Client-only SPA: detect synchronously so mobile never flashes both buttons
+    const [platform] = useState(detectPlatform);
+    return platform;
+};
+
+const AppleIcon = () => (
+    <svg className="dm-store-icon" viewBox="0 0 384 512" aria-hidden="true" focusable="false">
+        <path fill="currentColor" d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z" />
+    </svg>
+);
+
+const GooglePlayIcon = () => (
+    <svg className="dm-store-icon" viewBox="0 0 512 512" aria-hidden="true" focusable="false">
+        <path fill="#00d7fe" d="M47 22c-8 8-12 21-12 37v394c0 16 4 29 12 37l2 2 221-221v-5L49 20z" />
+        <path fill="#ffce00" d="m343 345-73-74v-5l73-74 2 1 87 50c25 14 25 37 0 52l-87 49z" />
+        <path fill="#ff3a44" d="M345 344 270 269 47 492c8 9 22 10 37 1l261-149" />
+        <path fill="#00f076" d="M345 194 84 46c-15-9-29-8-37 1l223 222z" />
+    </svg>
+);
+
+const STORES = {
+    ios: { Icon: AppleIcon, name: 'App Store', labelKey: 'appleLabel' },
+    android: { Icon: GooglePlayIcon, name: 'Google Play', labelKey: 'googleLabel' },
+};
+
+/* ─── Store badge button ─────────────────────────────────────── */
+const StoreButton = ({ store, t, recommended = false }) => {
+    const { Icon, name, labelKey } = STORES[store];
+    return (
+        <a
+            href={STORE_LINKS[store]}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`dm-store-btn ${recommended ? 'dm-store-btn-recommended' : ''}`}
+            aria-label={`${t.download.ariaGet.replace('{store}', name)} (${t.download.newTab})`}
+        >
+            <span className="dm-store-shine" aria-hidden="true" />
+            <Icon />
+            <span className="dm-store-text">
+                <span className="dm-store-label">{t.download[labelKey]}</span>
+                <span className="dm-store-name">{name}</span>
+            </span>
+        </a>
     );
 };
 
-/* ─── Google Play Button ─────────────────────────────── */
-const GooglePlayButton = ({ t }) => (
-    <a
-        href="https://play.google.com/store/apps/details?id=com.chauxdevapps.dadomatch"
-        target="_blank"
-        rel="noreferrer"
-        className="dm-gp-btn"
-        aria-label="Get DadoMatch on Google Play"
-    >
-        <span className="dm-gp-shine" aria-hidden="true" />
-        <svg className="dm-gp-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path d="M3.18 23.76c.34.19.72.24 1.1.14l11.4-11.4-2.38-2.38-10.12 13.64zM20.12 10.4l-2.8-1.6-2.66 2.66 2.66 2.66 2.82-1.6c.8-.46.8-1.66-.02-2.12zM2.18.76C1.94 1.02 1.8 1.4 1.8 1.9v20.2c0 .5.14.88.4 1.12l.06.06L13.52 12v-.26L2.24.7l-.06.06z" fill="#fff"/>
-        </svg>
-        <span className="dm-gp-text">
-            <span className="dm-gp-label">{t.cta.googleLabel}</span>
-            <span className="dm-gp-store">Google Play</span>
-        </span>
-    </a>
-);
+/* Mobile: only the store for this device. Desktop: both. */
+const visibleStores = (platform) => (platform === 'desktop' ? ['ios', 'android'] : [platform]);
+
+const storeRowVariants = {
+    hidden: {},
+    visible: { transition: { staggerChildren: 0.12, delayChildren: 0.1 } },
+};
+
+const storeItemVariants = {
+    hidden: { opacity: 0, y: 16, scale: 0.96 },
+    visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.55, ease: [0.21, 0.45, 0.32, 0.9] } },
+};
+
+const StoreButtons = ({ platform, t, className = '' }) => {
+    const stores = visibleStores(platform);
+    const reduceMotion = useReducedMotion();
+    return (
+        <motion.div
+            className={`dm-store-row ${className}`}
+            variants={storeRowVariants}
+            initial={reduceMotion ? false : 'hidden'}
+            whileInView="visible"
+            viewport={{ once: true, margin: '-40px' }}
+        >
+            {stores.map((store) => (
+                <motion.div key={store} variants={storeItemVariants} className="dm-store-item">
+                    <StoreButton store={store} t={t} recommended={platform === store} />
+                </motion.div>
+            ))}
+        </motion.div>
+    );
+};
+
+/* ─── Smart download card ────────────────────────────────────── */
+const DownloadCard = ({ platform, t }) => {
+    const detected = platform !== 'desktop';
+    return (
+        <div className="dm-download-card" role="region" aria-labelledby="dm-download-title">
+            <img src={dm_logo} alt="" className="dm-download-logo" />
+            <h2 id="dm-download-title" className="dm-cta-title">{t.cta.title}</h2>
+            <p className="dm-cta-sub">{t.cta.sub}</p>
+
+            <p className="dm-download-detect" aria-live="polite">
+                <span className="dm-download-dot" aria-hidden="true" />
+                {detected ? t.download.detected[platform] : t.download.desktop}
+            </p>
+
+            <StoreButtons platform={platform} t={t} className="dm-store-row-center" />
+
+            <ul className="dm-download-meta">
+                {t.download.meta.map((item) => <li key={item}>{item}</li>)}
+            </ul>
+        </div>
+    );
+};
 
 /* ─── Step card (How It Works) ───────────────────────────────── */
 const StepCard = ({ num, title, desc, delay }) => (
@@ -131,12 +211,40 @@ const StepCard = ({ num, title, desc, delay }) => (
     </FadeUp>
 );
 
-/* ─── Main Page ──────────────────────────────────────────────── */
+/* ─── Store redirect screen ──────────────────────────────────── */
+const StoreRedirect = ({ platform }) => {
+    const t = translations[/^es\b/i.test(navigator.language || '') ? 'es' : 'en'].redirect;
+    const store = STORES[platform].name;
+    const url = STORE_LINKS[platform];
+
+    useEffect(() => {
+        window.location.replace(url);
+    }, [url]);
+
+    return (
+        <main className="dm-page dm-redirect" aria-busy="true">
+            <img src={dm_logo} alt="DadoMatch" className="dm-download-logo" />
+            <p className="dm-redirect-title" role="status">{t.opening.replace('{store}', store)}</p>
+            <span className="dm-redirect-spinner" aria-hidden="true" />
+            <a href={url} className="dm-redirect-link">{t.manual}</a>
+            <a href="/dadomatch?web" className="dm-redirect-web">{t.web}</a>
+        </main>
+    );
+};
+
+/* ─── Route entry ────────────────────────────────────────────── */
 const DadoMatch = () => {
+    const [redirectTo] = useState(getRedirectTarget);
+    return redirectTo ? <StoreRedirect platform={redirectTo} /> : <DadoMatchLanding />;
+};
+
+/* ─── Main Page ──────────────────────────────────────────────── */
+const DadoMatchLanding = () => {
     const [isMuted, setIsMuted] = useState(true);
     const [isExpanded, setIsExpanded] = useState(false);
     const videoRef = useRef(null);
     const [language, setLanguage] = useState('en');
+    const platform = usePlatform();
     const { scrollY } = useScroll();
 
     useEffect(() => {
@@ -200,7 +308,11 @@ const DadoMatch = () => {
                         </button>
                     </div>
 
-                    <a href="https://play.google.com/store/apps/details?id=com.chauxdevapps.dadomatch" target="_blank" rel="noreferrer" className="dm-nav-cta">{t.nav.download}</a>
+                    {platform === 'desktop' ? (
+                        <a href="#dm-download" className="dm-nav-cta">{t.nav.download}</a>
+                    ) : (
+                        <a href={STORE_LINKS[platform]} target="_blank" rel="noopener noreferrer" className="dm-nav-cta">{t.nav.download}</a>
+                    )}
                 </div>
             </nav>
 
@@ -229,7 +341,7 @@ const DadoMatch = () => {
                         ))}
                     </FadeUp>
                     <FadeUp delay={0.4}>
-                        <GooglePlayButton t={t} />
+                        <StoreButtons platform={platform} t={t} className="dm-store-row-hero" />
                     </FadeUp>
                 </motion.div>
 
@@ -376,8 +488,8 @@ const DadoMatch = () => {
                             </ul>
                         </FadeUp>
                     </div>
-                    <ScreenshotCarousel language={language} />
                 </div>
+                <DeviceScreenshots />
             </section>
 
             {/* TECH STACK */}
@@ -407,13 +519,10 @@ const DadoMatch = () => {
             </section>
 
             {/* CTA */}
-            <section className="dm-cta-section">
+            <section id="dm-download" className="dm-cta-section">
                 <div className="dm-cta-glow" aria-hidden="true" />
-                <FadeUp className="dm-cta-content" id="dm-cta">
-                    <h2 className="dm-cta-title">{t.cta.title}</h2>
-                    <p className="dm-cta-sub">{t.cta.sub}</p>
-
-                    <GooglePlayButton t={t} />
+                <FadeUp className="dm-cta-content">
+                    <DownloadCard platform={platform} t={t} />
                 </FadeUp>
             </section>
 

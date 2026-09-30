@@ -11,12 +11,12 @@ const DadoMatchPrivacy = () => {
     return (
         <div className="dm-page min-h-screen">
             <nav className="dm-nav">
-                <Link to="/dadomatch" className="dm-nav-logo flex items-center gap-2">
+                <Link to="/dadomatch?web" className="dm-nav-logo flex items-center gap-2">
                     <img src={dm_logo} alt="DadoMatch Logo" className="w-8 h-8 rounded-lg object-contain" />
                     <span>DadoMatch</span>
                 </Link>
                 <div className="dm-nav-links">
-                    <Link to="/dadomatch" className="dm-nav-cta">Back to App</Link>
+                    <Link to="/dadomatch?web" className="dm-nav-cta">Back to App</Link>
                 </div>
             </nav>
 
@@ -140,7 +140,7 @@ const DadoMatchPrivacy = () => {
                 <div className="flex flex-col md:flex-row justify-between items-center w-full gap-4">
                     <span>© 2026 DadoMatch · ChauxDevApps</span>
                     <div className="flex items-center gap-4">
-                        <Link to="/dadomatch" className="hover:text-dm-cyan transition-colors">Home</Link>
+                        <Link to="/dadomatch?web" className="hover:text-dm-cyan transition-colors">Home</Link>
                         <span className="dm-footer-sep">·</span>
                         <a href="mailto:felchax@gmail.com" className="hover:text-dm-cyan transition-colors">Support</a>
                     </div>

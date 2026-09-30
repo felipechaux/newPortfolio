@@ -58,11 +58,18 @@ export const translations = {
         },
         cta: {
             title: "Ready to break the ice?",
-            sub: "Free to download. Available now on Android.",
-            google: "📱 Get on Google Play",
-            googleLabel: "Get it on",
-            apple: "Download on App Store",
+            sub: "Free to download. Available now on iOS and Android.",
         },
+        download: {
+            appleLabel: "Download on the",
+            googleLabel: "Get it on",
+            ariaGet: "Download DadoMatch on {store}",
+            newTab: "opens in a new tab",
+            detected: { ios: "iPhone detected — App Store is your best match", android: "Android detected — Google Play is your best match" },
+            desktop: "Grab it on your phone — available on both stores",
+            meta: ["Free to start", "iOS & Android", "Google & Apple Sign-In"]
+        },
+        redirect: { opening: "Opening {store}…", manual: "Not redirected? Tap here", web: "View website instead" },
         footer: { copyright: "© 2025 DadoMatch · ChauxDevApps", contact: "Contact", privacy: "Privacy Policy" }
     },
     es: {
@@ -124,11 +131,18 @@ export const translations = {
         },
         cta: {
             title: "¿Listo para romper el hielo?",
-            sub: "Descarga gratis. Disponible ahora en Android.",
-            google: "📱 Google Play",
-            googleLabel: "Disponible en",
-            apple: "App Store",
+            sub: "Descarga gratis. Disponible ahora en iOS y Android.",
         },
+        download: {
+            appleLabel: "Descárgala en",
+            googleLabel: "Disponible en",
+            ariaGet: "Descarga DadoMatch en {store}",
+            newTab: "se abre en una pestaña nueva",
+            detected: { ios: "iPhone detectado — App Store es tu mejor opción", android: "Android detectado — Google Play es tu mejor opción" },
+            desktop: "Descárgala en tu móvil — disponible en ambas tiendas",
+            meta: ["Empieza gratis", "iOS y Android", "Google & Apple Sign-In"]
+        },
+        redirect: { opening: "Abriendo {store}…", manual: "¿No te redirigió? Toca aquí", web: "Ver el sitio web" },
         footer: { copyright: "© 2025 DadoMatch · ChauxDevApps", contact: "Contacto", privacy: "Privacidad" }
     }
 };
