@@ -32,6 +32,7 @@ import {
   swift,
   quicksite,
   kanguro,
+  connect,
   space,
   galaxySnap,
   dadomatch,
@@ -46,6 +47,10 @@ export const navLinks = [
   {
     id: 'projects',
     title: 'Projects',
+  },
+  {
+    id: 'work',
+    title: 'Work',
   },
   {
     id: 'contact',
@@ -98,18 +103,25 @@ const technologies = [
     icon: javascript,
   },
   {
-    name: 'git',
+    name: 'Git',
     icon: git,
   }
 ];
 
 const experiences = [
   {
-    title: 'Mobile Engineer',
+    title: 'Senior Mobile Developer',
+    company_name: 'Connect Assistance · Puerto Rico',
+    icon: connect,
+    iconBg: '#FFFFFF',
+    date: 'Jun 2026 - Present',
+  },
+  {
+    title: 'Senior Mobile Developer',
     company_name: 'Kanguro Insurance',
     icon: kanguro,
     iconBg: '#FFFFFF',
-    date: 'Sep 2024 - Present',
+    date: 'Sep 2024 - Dec 2025',
   },
   {
     title: 'Mobile Developer',
@@ -190,6 +202,7 @@ const projects = [
     ],
     image: dadomatchLogo,
     demo: '/dadomatch',
+    featured: true,
     repo: ''
   },
   {
@@ -261,8 +274,9 @@ const projects = [
   },
   {
     id: 'project-6',
-    name: 'GalaxySnap',
-    description: 'NASA Astronomy Picture of the Day App',
+    name: 'GalaxySnap: Space Explorer',
+    description: 'Daily NASA imagery, Earth from deep space and near-Earth asteroids',
+    featured: true,
     tags: [
       {
         name: 'kotlin',

@@ -80,14 +80,13 @@
 }
 
 .vertical-timeline.vertical-timeline-custom-line::before {
-  background: rgb(66, 66, 66);
   background: linear-gradient(180deg,
-      rgba(66, 66, 66, 0.8) 40%,
-      rgba(234, 234, 236, 0.45) 100%);
+      rgba(124, 58, 237, 0.5) 0%,
+      rgba(99, 102, 241, 0.15) 100%);
 }
 
 .vertical-timeline-element-icon {
-  box-shadow: 0 0 0 4px #afafafd2, inset 0 2px 0 rgba(0, 0, 0, 0.08),
+  box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.3), inset 0 2px 0 rgba(0, 0, 0, 0.08),
     0 3px 0 4px rgba(0, 0, 0, 0.05);
 }
 
@@ -1349,5 +1348,27 @@
 
   .dm-nav {
     padding: 0.8rem 8px;
+  }
+}
+/* GalaxySnap screenshot carousel */
+.gs-track {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(167, 139, 250, 0.4) transparent;
+}
+.gs-track::-webkit-scrollbar {
+  height: 6px;
+}
+.gs-track::-webkit-scrollbar-thumb {
+  background: rgba(167, 139, 250, 0.4);
+  border-radius: 999px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gs-track {
+    scroll-behavior: auto;
+  }
+  #projects ~ * .group,
+  #projects ~ * .group img {
+    transform: none !important;
   }
 }

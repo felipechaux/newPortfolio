@@ -1,174 +1,181 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { styles } from '../styles';
 import { navLinks } from '../constants';
-import { close, menu, astronaut } from '../assets';
+import { astronaut } from '../assets';
 import { useLang } from '../context/LanguageContext';
 import { pt } from '../constants/portfolioTranslations';
 
+const focusRing =
+  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-400 focus-visible:ring-offset-2 focus-visible:ring-offset-[#050816]';
+
 const LangToggle = ({ lang, setLang }) => (
-  <div
-    style={{
-      display: 'flex',
-      background: 'rgba(255,255,255,0.07)',
-      borderRadius: '8px',
-      padding: '3px',
-      gap: '2px',
-    }}
-  >
+  <div className="flex w-fit gap-0.5 rounded-lg bg-white/[0.07] p-[3px]" role="group" aria-label="Language">
     {['en', 'es'].map((l) => (
       <button
         key={l}
+        type="button"
+        aria-pressed={lang === l}
         onClick={() => setLang(l)}
-        style={{
-          padding: '4px 11px',
-          borderRadius: '6px',
-          fontSize: '11px',
-          fontFamily: 'Poppins, sans-serif',
-          fontWeight: 700,
-          letterSpacing: '1px',
-          border: 'none',
-          cursor: 'pointer',
-          transition: 'all 0.2s',
-          background: lang === l ? 'linear-gradient(135deg, #7c3aed, #6366f1)' : 'transparent',
-          color: lang === l ? '#fff' : '#9999a1',
-        }}
-      >
+        className={`min-h-[32px] rounded-md px-3 font-poppins text-[11px] font-bold tracking-[1px] transition-colors duration-200 ${focusRing} ${
+          lang === l
+            ? 'bg-gradient-to-br from-violet-600 to-indigo-500 text-white'
+            : 'text-taupe hover:text-timberWolf'
+        }`}>
         {l.toUpperCase()}
       </button>
     ))}
   </div>
 );
 
-const Navbar = () => {
+const MenuIcon = ({ open }) => (
+  <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+    {open ? <path d="M18 6 6 18M6 6l12 12" /> : <path d="M4 7h16M4 12h16M4 17h16" />}
+  </svg>
+);
+
+// Highlights the nav link of the section currently in view.
+const useActiveSection = (ids, enabled) => {
   const [active, setActive] = useState('');
-  const [toggle, setToggle] = useState(false);
+  useEffect(() => {
+    if (!enabled) return undefined;
+    const idOf = new Map();
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) setActive(idOf.get(e.target));
+        });
+      },
+      { rootMargin: '-45% 0px -50% 0px' }
+    );
+    ids.forEach((id) => {
+      const anchor = document.getElementById(id);
+      // SectionWrapper puts the id on a span; observe its section instead.
+      const target = anchor?.closest('section') ?? anchor;
+      if (target) {
+        idOf.set(target, id);
+        observer.observe(target);
+      }
+    });
+    return () => observer.disconnect();
+  }, [ids, enabled]);
+  return active;
+};
+
+const Navbar = () => {
+  const [open, setOpen] = useState(false);
   const { lang, setLang } = useLang();
   const tr = pt[lang].nav;
+  const { pathname } = useLocation();
+  const isHome = pathname === '/';
+  const active = useActiveSection(
+    React.useMemo(() => navLinks.map((n) => n.id), []),
+    isHome
+  );
 
-  const location = typeof window !== 'undefined' ? window.location : { pathname: '/' };
-  const currentPath = location.pathname;
+  useEffect(() => {
+    document.body.style.overflow = open ? 'hidden' : '';
+    if (!open) return undefined;
+    const onKey = (e) => e.key === 'Escape' && setOpen(false);
+    document.addEventListener('keydown', onKey);
+    return () => document.removeEventListener('keydown', onKey);
+  }, [open]);
 
-  const navLabels = {
-    about: tr.about,
-    projects: tr.projects,
-    skills: tr.skills,
-    work: tr.work,
-    contact: tr.contact,
-  };
+  const href = (id) => (isHome ? `#${id}` : `/#${id}`);
+  const isActive = (id) => active === id;
 
   return (
     <nav
-      className={`${styles.paddingX} w-full flex items-center py-2 fixed top-0 z-20 xxs:h-[12vh]`}
-      style={{
-        background: 'rgba(5,8,22,0.88)',
-        backdropFilter: 'blur(14px)',
-        WebkitBackdropFilter: 'blur(14px)',
-        borderBottom: '1px solid rgba(255,255,255,0.07)',
-      }}
-    >
-      <div className="w-full flex justify-between items-center max-w-7xl mx-auto">
-        {/* Logo */}
+      className={`${styles.paddingX} fixed top-0 z-20 flex w-full items-center py-3 border-b border-white/[0.07] bg-[rgba(5,8,22,0.88)] backdrop-blur-[14px]`}>
+      <div className="mx-auto flex w-full max-w-7xl items-center justify-between">
         <Link
           to="/"
-          className="flex items-center gap-2"
-          onClick={() => { setActive(''); window.scrollTo(0, 0); }}>
+          className={`flex items-center gap-3 rounded-lg ${focusRing}`}
+          onClick={() => window.scrollTo(0, 0)}>
           <img
             src={astronaut}
-            alt="logo"
-            className="sm:w-[46px] sm:h-[46px] w-[40px] h-[40px] object-contain"
-            style={{ filter: 'brightness(0) invert(1)' }}
+            alt=""
+            className="h-10 w-10 object-contain brightness-0 invert"
           />
-          <h2 style={{ color: '#d4d4d8', fontFamily: 'Mova, sans-serif', letterSpacing: '3px', fontSize: '16px' }}>
-            🄵🄴🄻🄸🄿🄴
-          </h2>
+          <span className="font-poppins text-[15px] font-semibold tracking-wide text-timberWolf">
+            Felipe Chaux
+          </span>
         </Link>
 
-        {/* Desktop nav */}
-        <ul className="list-none hidden sm:flex flex-row gap-10 mt-2 items-center">
+        {/* Desktop */}
+        <ul className="hidden md:flex list-none items-center gap-8">
           {navLinks.map((nav) => (
-            <li
-              key={nav.id}
-              className={`${active === nav.title ? 'text-timberWolf' : 'text-taupe'
-                } hover:text-timberWolf text-[17px] font-medium font-mova
-                uppercase tracking-[3px] cursor-pointer nav-links transition-colors`}
-              onClick={() => setActive(nav.title)}>
-              <a href={`#${nav.id}`}>{navLabels[nav.id] || nav.title}</a>
+            <li key={nav.id}>
+              <a
+                href={href(nav.id)}
+                aria-current={isActive(nav.id) ? 'true' : undefined}
+                className={`relative whitespace-nowrap rounded font-poppins text-[14px] font-medium transition-colors duration-200 ${focusRing} ${
+                  isActive(nav.id) ? 'text-white' : 'text-taupe hover:text-timberWolf'
+                }`}>
+                {tr[nav.id] || nav.title}
+                <span
+                  className={`absolute -bottom-1.5 left-0 h-[2px] rounded-full bg-violet-400 transition-all duration-300 ${
+                    isActive(nav.id) ? 'w-full' : 'w-0'
+                  }`}
+                />
+              </a>
             </li>
           ))}
-          {/* Mentoring link */}
-          <li className="cursor-pointer">
+          <li>
             <Link
               to="/mentoring"
-              className="font-mova text-[17px] font-medium uppercase tracking-[3px] transition-opacity hover:opacity-80"
-              style={{
-                background: 'linear-gradient(135deg, #7c3aed, #6366f1)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
-              }}
-            >
+              className={`whitespace-nowrap rounded-lg border border-violet-400/40 bg-violet-500/10 px-4 py-2 font-poppins text-[14px] font-semibold text-violet-200 transition-colors duration-200 hover:bg-violet-500/20 ${focusRing}`}>
               {tr.mentoring}
             </Link>
           </li>
-          {currentPath !== '/' && (
-            <li className="text-taupe hover:text-timberWolf text-[17px] font-medium font-mova uppercase tracking-[3px] cursor-pointer nav-links transition-colors">
-              <Link to="/privacy-policy">Privacy Policy</Link>
-            </li>
-          )}
           <li>
             <LangToggle lang={lang} setLang={setLang} />
           </li>
         </ul>
 
-        {/* Mobile menu */}
-        <div className="sm:hidden flex flex-1 w-screen justify-end items-center">
-          {toggle ? (
-            <div
-              className={`p-6 absolute top-0 left-0 w-screen h-[100vh] z-10 menu ${toggle ? 'menu-open' : 'menu-close'}`}
-              style={{ background: 'rgba(5,8,22,0.98)' }}
-            >
-              <div className="flex justify-between items-center">
-                <LangToggle lang={lang} setLang={setLang} />
-                <img src={close} alt="close" className="w-[22px] h-[22px] object-contain cursor-pointer" onClick={() => setToggle(!toggle)} />
-              </div>
-              <ul className="list-none flex flex-col items-start justify-end mt-[10rem] -ml-[35px]">
-                {navLinks.map((nav) => (
-                  <li
-                    id={nav.id}
-                    key={nav.id}
-                    className={`${active === nav.title ? 'text-timberWolf' : 'text-taupe'
-                      } text-[88px] font-bold font-arenq uppercase tracking-[1px] cursor-pointer`}
-                    onClick={() => { setToggle(!toggle); setActive(nav.title); }}>
-                    <a href={`#${nav.id}`}>{navLabels[nav.id] || nav.title}</a>
-                  </li>
-                ))}
-                <li className="text-[88px] font-bold font-arenq uppercase tracking-[1px] cursor-pointer">
-                  <Link
-                    to="/mentoring"
-                    onClick={() => setToggle(false)}
-                    style={{
-                      background: 'linear-gradient(135deg, #7c3aed, #6366f1)',
-                      WebkitBackgroundClip: 'text',
-                      WebkitTextFillColor: 'transparent',
-                      backgroundClip: 'text',
-                    }}
-                  >
-                    {tr.mentoring}
-                  </Link>
-                </li>
-                {currentPath !== '/' && (
-                  <li className="text-taupe hover:text-timberWolf text-[44px] font-bold font-arenq uppercase tracking-[1px] cursor-pointer mt-8">
-                    <Link to="/privacy-policy" onClick={() => setToggle(false)}>Privacy Policy</Link>
-                  </li>
-                )}
-              </ul>
-            </div>
-          ) : (
-            <img src={menu} alt="menu" className="w-[34px] h-[34px] object-contain cursor-pointer" onClick={() => setToggle(!toggle)} />
-          )}
-        </div>
+        {/* Mobile */}
+        <button
+          type="button"
+          className={`md:hidden flex h-11 w-11 items-center justify-center rounded-lg text-timberWolf ${focusRing}`}
+          aria-label={open ? 'Close menu' : 'Open menu'}
+          aria-expanded={open}
+          aria-controls="mobile-menu"
+          onClick={() => setOpen((o) => !o)}>
+          <MenuIcon open={open} />
+        </button>
       </div>
+
+      {open && (
+        <div
+          id="mobile-menu"
+          className="md:hidden absolute inset-x-0 top-full z-10 flex h-[calc(100dvh-100%)] flex-col bg-[#050816] px-6 pb-10 pt-8">
+          <ul className="flex flex-col gap-2">
+            {navLinks.map((nav) => (
+              <li key={nav.id}>
+                <a
+                  href={href(nav.id)}
+                  onClick={() => setOpen(false)}
+                  className={`block rounded-lg py-3 font-poppins text-[28px] font-bold transition-colors ${focusRing} ${
+                    isActive(nav.id) ? 'text-white' : 'text-taupe'
+                  }`}>
+                  {tr[nav.id] || nav.title}
+                </a>
+              </li>
+            ))}
+            <li>
+              <Link
+                to="/mentoring"
+                onClick={() => setOpen(false)}
+                className={`block rounded-lg py-3 font-poppins text-[28px] font-bold text-violet-300 ${focusRing}`}>
+                {tr.mentoring}
+              </Link>
+            </li>
+          </ul>
+          <div className="mt-auto">
+            <LangToggle lang={lang} setLang={setLang} />
+          </div>
+        </div>
+      )}
     </nav>
   );
 };

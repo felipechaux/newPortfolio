@@ -48,6 +48,7 @@ import swift from './tech/swift.png';
 import coverhunt from './company/coverhunt.png';
 import quicksite from './company/quicksite.jpeg';
 import kanguro from './company/kanguro.jpg';
+import connect from './company/connect.jpg';
 import acid from './company/acid.jpg';
 import globant from './company/globant.png';
 import dcc from './company/dcc.png';
@@ -153,6 +154,7 @@ export {
   swift,
   quicksite,
   kanguro,
+  connect,
   galaxySnap,
   dadomatch,
   dadomatchLogo

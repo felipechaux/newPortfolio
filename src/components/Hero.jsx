@@ -56,7 +56,7 @@ const Hero = () => {
             className="font-poppins font-black text-timberWolf"
             style={{ fontSize: 'clamp(44px, 7vw, 86px)', lineHeight: 1.05, marginBottom: '16px' }}
           >
-            Hi, I'm{' '}
+            {tr.greeting}{' '}
             <span style={{
               background: 'linear-gradient(135deg, #a78bfa, #818cf8, #60a5fa)',
               WebkitBackgroundClip: 'text',
@@ -135,7 +135,7 @@ const Hero = () => {
 
         {/* Scroll indicator */}
         <div className="absolute xs:bottom-10 bottom-32 w-full flex justify-center items-center">
-          <a href="#about">
+          <a href="#about" aria-label="Scroll to About section">
             <div className="w-[35px] h-[64px] rounded-3xl border-4 border-purple-500/40 flex justify-center items-start p-2">
               <motion.div
                 animate={{ y: [0, 24, 0] }}

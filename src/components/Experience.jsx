@@ -7,7 +7,7 @@ import 'react-vertical-timeline-component/style.min.css';
 import { styles } from '../styles';
 import { experiences } from '../constants';
 import { SectionWrapper } from '../hoc';
-import { download, downloadHover, resume } from '../assets';
+import { resume } from '../assets';
 import { textVariant } from '../utils/motion';
 import { useLang } from '../context/LanguageContext';
 import { pt } from '../constants/portfolioTranslations';
@@ -23,7 +23,7 @@ const ExperienceCard = ({ experience }) => (
     }}
     contentArrowStyle={{ borderRight: '7px solid rgba(124,58,237,0.4)' }}
     date={
-      <h3 className="text-taupe text-[16px] font-bold font-beckman">
+      <h3 className="text-taupe text-[15px] font-semibold font-poppins">
         {experience.date}
       </h3>
     }
@@ -33,17 +33,24 @@ const ExperienceCard = ({ experience }) => (
     }}
     icon={
       <div className="flex justify-center items-center w-full h-full">
-        <img src={experience.icon} alt={experience.company_name} className="w-[60%] h-[60%] object-contain" />
+        {experience.icon ? (
+          <img src={experience.icon} alt={experience.company_name} className="w-[60%] h-[60%] object-contain" />
+        ) : (
+          // No logo asset yet: show the company initials.
+          <span className="font-poppins text-[15px] font-bold tracking-wide text-violet-200" aria-hidden="true">
+            {experience.iconText}
+          </span>
+        )}
       </div>
     }
   >
     <div>
-      <h3 className="text-timberWolf text-[22px] font-bold font-beckman tracking-[2px]">
+      <h3 className="text-timberWolf text-[20px] font-bold font-poppins">
         {experience.title}
       </h3>
       <p
-        className="text-taupe text-[18px] font-semibold font-overcameBold tracking-[1px]"
-        style={{ margin: 0 }}>
+        className="text-taupe text-[16px] font-medium font-poppins"
+        style={{ margin: '4px 0 0' }}>
         {experience.company_name}
       </p>
     </div>
@@ -80,32 +87,23 @@ const Experience = () => {
               alignItems: 'center',
             }}
             contentArrowStyle={{ borderRight: '7px solid rgba(124,58,237,0.4)' }}
-            iconStyle={{ background: '#333333', boxShadow: '0 0 0 4px rgba(124,58,237,0.3)' }}
+            iconStyle={{ background: '#151030', boxShadow: '0 0 0 4px rgba(124,58,237,0.3)' }}
             icon={
               <div className="flex justify-center items-center w-full h-full">
-                <img src={resume} alt="resume" className="w-[45%] h-[45%] object-contain" />
+                <img src={resume} alt="" className="w-[45%] h-[45%] object-contain" />
               </div>
             }
           >
-            <button
-              className="live-demo flex justify-between
-              sm:text-[18px] text-[14px] text-timberWolf
-              font-bold font-beckman items-center py-5 pl-3 pr-3
-              whitespace-nowrap gap-1 sm:w-[148px] sm:h-[58px]
-              w-[125px] h-[46px] rounded-[10px]
-              hover:bg-purple-700 hover:text-white
-              transition duration-[0.2s] ease-in-out"
-              style={{
-                background: 'linear-gradient(135deg, #7c3aed, #6366f1)',
-                color: '#fff',
-              }}
-              onClick={() => window.open('https://github.com/felipechaux/curriculum/blob/master/CVFelipeChaux.pdf', '_blank')}
-              onMouseOver={() => document.querySelector('.download-btn').setAttribute('src', downloadHover)}
-              onMouseOut={() => document.querySelector('.download-btn').setAttribute('src', download)}
-            >
-              MY RESUME
-              <img src={download} alt="download" className="download-btn sm:w-[26px] sm:h-[26px] w-[23px] h-[23px] object-contain" />
-            </button>
+            <a
+              href="https://github.com/felipechaux/curriculum/blob/master/CVFelipeChaux.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex min-h-[48px] items-center gap-2 rounded-xl bg-gradient-to-br from-violet-600 to-indigo-500 px-6 font-poppins text-[15px] font-semibold text-white shadow-[0_4px_20px_rgba(124,58,237,0.3)] transition hover:opacity-90 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-400 focus-visible:ring-offset-2 focus-visible:ring-offset-[#050816]">
+              <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <path d="M12 3v12m0 0-4-4m4 4 4-4M5 21h14" />
+              </svg>
+              {tr.resume}
+            </a>
           </VerticalTimelineElement>
         </VerticalTimeline>
       </div>
