@@ -41,6 +41,8 @@ import {
 export const socialLinks = {
   linkedin: 'https://www.linkedin.com/in/abel-felipe-chaux-gutierrez-8021108a/',
   github: 'https://github.com/felipechaux',
+  upwork: 'https://www.upwork.com/freelancers/~016caffca74568a5c3',
+  freelancer: 'https://www.freelancer.com/u/felipechauxx',
 };
 
 export const navLinks = [

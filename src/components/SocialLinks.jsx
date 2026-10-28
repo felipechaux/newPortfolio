@@ -12,7 +12,23 @@ const GitHubLogo = ({ className }) => (
   </svg>
 );
 
+const UpworkLogo = ({ className }) => (
+  <svg viewBox="0 0 24 24" className={className} fill="currentColor" aria-hidden="true">
+    <path d="M18.56 13.25c-1.04 0-2.02-.44-2.9-1.16l.21-1.02.01-.04c.19-1.08.8-2.9 2.68-2.9a2.56 2.56 0 0 1 2.56 2.56 2.57 2.57 0 0 1-2.56 2.56Zm0-7.72c-2.4 0-4.26 1.56-5.02 4.13-1.16-1.74-2.03-3.83-2.54-5.6H8.42v6.76a2.36 2.36 0 0 1-2.36 2.36A2.36 2.36 0 0 1 3.7 10.8V4.06H1.12v6.76a4.93 4.93 0 0 0 4.94 4.97 4.93 4.93 0 0 0 4.93-4.97V9.68c.5 1.04 1.12 2.1 1.86 3.03l-1.58 7.43h2.65l1.15-5.38c1 .64 2.16 1.05 3.49 1.05A5.15 5.15 0 0 0 23.7 10.7a5.16 5.16 0 0 0-5.14-5.17Z" />
+  </svg>
+);
+
+// Generic briefcase: Freelancer.com's mark doesn't read well at icon size.
+const FreelancerLogo = ({ className }) => (
+  <svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <rect x="3" y="7" width="18" height="13" rx="2" />
+    <path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 13h18" />
+  </svg>
+);
+
 const links = [
+  { key: 'upwork', label: 'Upwork', href: socialLinks.upwork, Logo: UpworkLogo },
+  { key: 'freelancer', label: 'Freelancer', href: socialLinks.freelancer, Logo: FreelancerLogo },
   { key: 'linkedin', label: 'LinkedIn', href: socialLinks.linkedin, Logo: LinkedInLogo },
   { key: 'github', label: 'GitHub', href: socialLinks.github, Logo: GitHubLogo },
 ];
