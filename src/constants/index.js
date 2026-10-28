@@ -33,11 +33,15 @@ import {
   quicksite,
   kanguro,
   connect,
-  space,
   galaxySnap,
   dadomatch,
   dadomatchLogo
 } from '../assets';
+
+export const socialLinks = {
+  linkedin: 'https://www.linkedin.com/in/abel-felipe-chaux-gutierrez-8021108a/',
+  github: 'https://github.com/felipechaux',
+};
 
 export const navLinks = [
   {

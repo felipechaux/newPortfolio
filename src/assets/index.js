@@ -1,5 +1,3 @@
-import space from './backgrounds/bg-space.jpg';
-import nairobi from './backgrounds/nairobi.png';
 import whiteabstract from './backgrounds/white-abstract.png';
 
 import logo from './logo/logo-black.png';
@@ -83,7 +81,6 @@ import dadomatch from './projects/dadomatch_feature.png';
 import dadomatchLogo from './projects/dadomatch_logo.jpg';
 
 export {
-  nairobi,
   whiteabstract,
   logo,
   logotext,
@@ -125,7 +122,6 @@ export {
   kelhel,
   microverse,
   games,
-  space,
   movies,
   acid,
   inproext,

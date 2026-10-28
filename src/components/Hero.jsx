@@ -1,9 +1,10 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { styles } from '../styles';
-import { space } from '../assets';
+import { GridGlow, HeroShowcase } from './Backdrop';
 import { useLang } from '../context/LanguageContext';
 import { pt } from '../constants/portfolioTranslations';
+import SocialLinks from './SocialLinks';
 
 const Hero = () => {
   const { lang } = useLang();
@@ -17,16 +18,14 @@ const Hero = () => {
 
   return (
     <>
-      {/* Space background + dark overlay */}
-      <div className="absolute top-0 left-0 z-0 h-[100vh] w-screen">
-        <img src={space} alt="space background" className="w-full h-full object-cover" />
-        <div style={{
-          position: 'absolute', inset: 0,
-          background: 'linear-gradient(135deg, rgba(5,8,22,0.88) 0%, rgba(5,8,22,0.70) 100%)',
-        }} />
+      {/* Code-drawn backdrop: dot grid, glows and the apps I've shipped */}
+      <div className="absolute top-0 left-0 z-0 h-[100vh] w-full overflow-hidden bg-primary">
+        <GridGlow />
+        <HeroShowcase />
+        <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-primary" />
       </div>
 
-      <section className="relative flex items-center w-full h-screen overflow-hidden">
+      <section className="relative flex items-center w-full min-h-screen overflow-hidden pt-28 pb-28 sm:pb-24">
         <div className={`${styles.paddingX} max-w-7xl mx-auto relative z-10 w-full`}>
 
           {/* Badge */}
@@ -53,7 +52,7 @@ const Hero = () => {
             initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.65, delay: 0.1 }}
-            className="font-poppins font-black text-timberWolf"
+            className="font-poppins font-black text-timberWolf xl:max-w-[600px]"
             style={{ fontSize: 'clamp(44px, 7vw, 86px)', lineHeight: 1.05, marginBottom: '16px' }}
           >
             {tr.greeting}{' '}
@@ -83,15 +82,10 @@ const Hero = () => {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.32 }}
-            className="flex gap-10 flex-wrap mb-12"
+            className="flex gap-x-6 gap-y-4 sm:gap-x-10 flex-wrap mb-12"
           >
             {stats.map((s) => (
-              <div key={s.label} style={{
-                paddingRight: '32px',
-                borderRight: '1px solid rgba(255,255,255,0.08)',
-              }}
-                className="last:border-r-0 last:pr-0"
-              >
+              <div key={s.label} className="border-r border-white/[0.08] pr-6 sm:pr-8 last:border-r-0 last:pr-0">
                 <p className="font-poppins font-black text-timberWolf" style={{ fontSize: 'clamp(28px, 3.5vw, 42px)', lineHeight: 1 }}>
                   {s.num}
                 </p>
@@ -130,11 +124,12 @@ const Hero = () => {
             >
               {tr.ctaMentoring}
             </Link>
+            <SocialLinks compact />
           </motion.div>
         </div>
 
         {/* Scroll indicator */}
-        <div className="absolute xs:bottom-10 bottom-32 w-full flex justify-center items-center">
+        <div className="absolute bottom-8 w-full hidden sm:flex justify-center items-center">
           <a href="#about" aria-label="Scroll to About section">
             <div className="w-[35px] h-[64px] rounded-3xl border-4 border-purple-500/40 flex justify-center items-start p-2">
               <motion.div

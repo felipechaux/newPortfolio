@@ -6,6 +6,7 @@ import { SectionWrapper } from '../hoc';
 import { slideIn } from '../utils/motion';
 import { useLang } from '../context/LanguageContext';
 import { pt } from '../constants/portfolioTranslations';
+import SocialLinks from './SocialLinks';
 
 const inputClass =
   'bg-white/[0.04] py-4 px-6 placeholder:text-taupe text-timberWolf rounded-lg border border-line font-medium transition-colors focus:outline-none focus:border-violet-400 focus:ring-2 focus:ring-violet-400/30';
@@ -140,6 +141,11 @@ const Contact = () => {
             </p>
           </div>
         </form>
+
+        <div className="mt-10 border-t border-line pt-8">
+          <p className="mb-4 font-poppins text-[15px] text-taupe">{tr.orFindMe}</p>
+          <SocialLinks />
+        </div>
       </motion.div>
     </div>
   );

@@ -1372,3 +1372,11 @@
     transform: none !important;
   }
 }
+
+/* Subtle dot grid used by the code-drawn backgrounds */
+.dot-grid {
+  background-image: radial-gradient(rgba(167, 139, 250, 0.16) 1px, transparent 1px);
+  background-size: 28px 28px;
+  -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, #000 30%, transparent 100%);
+  mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, #000 30%, transparent 100%);
+}

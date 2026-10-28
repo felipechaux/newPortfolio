@@ -55,7 +55,6 @@ export default {
         hero: 'linear-gradient(135deg, rgba(244,244,246,0.8) 60%, rgba(10,10,10,0.95) 60%)',
         'hero-mobile':
           'linear-gradient(137deg, rgba(244,244,246,0.8) 60%, rgba(10,10,10,1) 60%)',
-        tech: "linear-gradient(180deg, rgba(5,8,22,1) 0%, rgba(5,8,22,0.9) 15%, rgba(5,8,22,0.9) 85%, rgba(5,8,22,1) 100%), url('/src/assets/backgrounds/nairobi.png')",
       },
       fontFamily: {
         arenq: ['Arenq'],

@@ -92,6 +92,7 @@ export const pt = {
       sending: 'Sending',
       successMsg: 'Thank you. I will get back to you as soon as possible.',
       errorMsg: 'Something went wrong. Please try again.',
+      orFindMe: 'Prefer LinkedIn? Connect with me or check my code:',
     },
   },
   es: {
@@ -187,6 +188,7 @@ export const pt = {
       sending: 'Enviando',
       successMsg: 'Gracias. Me pondré en contacto contigo lo antes posible.',
       errorMsg: 'Algo salió mal. Por favor, inténtalo de nuevo.',
+      orFindMe: '¿Prefieres LinkedIn? Conectemos o revisa mi código:',
     },
   },
 };

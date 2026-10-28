@@ -14,6 +14,7 @@ import PrivacyPolicy from './components/PrivacyPolicy';
 import DadoMatch from './components/DadoMatch';
 import DadoMatchPrivacy from './components/DadoMatchPrivacy';
 import Mentoring from './components/Mentoring';
+import { GridGlow } from './components/Backdrop';
 
 const App = () => {
   return (
@@ -31,7 +32,8 @@ const App = () => {
               <div style={{ background: '#050816' }}>
                 <About />
               </div>
-              <div className="bg-tech bg-cover bg-center bg-no-repeat pb-10">
+              <div className="relative pb-10">
+                <GridGlow />
                 <Tech />
               </div>
               <Projects />
